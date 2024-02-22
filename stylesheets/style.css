@@ -41,7 +41,7 @@ main {
     border-radius: 75px;
 }
 
-header.navArea {
+.navArea {
     height: 3em;
     background: grey;
     display: flex;
@@ -78,6 +78,10 @@ button.settingsButton {
 
 button.settingsButton:hover {
     transform: scale(1.3) rotate(180deg);
+}
+
+button.settingsButton:active {
+    transform: scale(0.8);
 }
 
 nav.profileSection {
@@ -118,20 +122,11 @@ nav.profileSection {
 
 .active {
     background: white;
-    transform: scale(1);
     border-bottom: 4px solid rgba(0, 0, 0, 0.45);
 }
 
 .active input {
     font-family: 'Poppins Bold', sans-serif;
-}
-
-.active:hover {
-    transform: scale(1.05) !important;
-}
-
-.active:active {
-    transform: scale(0.95) !important;
 }
 
 .tab:hover {
@@ -141,7 +136,7 @@ nav.profileSection {
 }
 
 .tab:active {
-    transform: scale(0.9);
+    transform: scale(0.95);
 }
 
 .tabName {
@@ -175,6 +170,14 @@ nav.profileSection {
     margin-left: 10px;
 }
 
+.newTab:hover {
+    transform: scale(1.3) rotate(90deg);
+}
+
+.newTab:active {
+    transform: scale(0.8) rotate(180deg);
+}
+
 .newTab img {
     width: 1.5em;
 }
@@ -187,6 +190,7 @@ nav.profileSection {
 
 .closeTab:hover {
     background-color: darkgrey;
+    transform: scale(1.3) rotate(360deg);
 }
 
 .closeTab img {
@@ -225,6 +229,7 @@ nav.profileSection {
 
 .characterName:hover {
     transform: scale(1.025);
+    box-shadow: none;
 }
 
 .characterName:active {
@@ -244,4 +249,47 @@ nav.profileSection {
 .characterActions .circleIconButton {
     height: 4em;
     aspect-ratio: 1;
+}
+
+.popUpContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    z-index: -5;
+    display: none;
+
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    background: rgba(0, 0, 0, 0.25);
+    opacity: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popUp {
+    background: white;
+    box-shadow: rgb(0, 0, 0, 0.25) 0px 0px 5px;
+
+    width: 25em;
+    padding: 2em;
+
+    transform: scale(0.5);
+}
+
+.popUpTitle {
+    margin: 0;
+}
+
+.popUpButton {
+    padding: 0.5em 1em;
+    border-radius: 10px;
+}
+
+.popUpButtonTrue {
+    background: grey;
+    color: white;
 }

@@ -32,6 +32,20 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
+document.addEventListener("keydown", function (event) {
+    if (event.shiftKey && event.key === "t") {
+        NewTab();
+        event.preventDefault();
+    }
+});
+
+document.addEventListener("keydown", function (event) {
+    if (event.shiftKey && event.key === "w") {
+        DeleteTab(tabElements[activeElement].element);
+        event.preventDefault();
+    }
+});
+
 function NewTab() {
     if (tabElements.length >= 99) return;
 
@@ -49,7 +63,7 @@ function UpdateLocal() {
     for (let index = 0; index < tabElements.length; index++) {
         const tabData = tabElements[index];
 
-        if (tabData.element.firstElementChild.value == '')
+        if (tabData.element.firstElementChild.value.replace(" ", "") == '')
             tabData.element.firstElementChild.value = 'Unnamed';
         if (tabData.profile.name != tabData.element.firstElementChild.value) {
             tabData.profile.name = tabData.element.firstElementChild.value;
@@ -102,6 +116,11 @@ function SelectTab(tab) {
     }
 }
 
+function RequestDeleteTab(tab) {
+    ShowPopUp('Delete Character?', 'This will permanently delete this character! Make sure to backup to JSON first', 'Nevermind', 'Delete');
+    popUpPositive.setAttribute('onclick', 'DeleteTab(' + tab + ')');
+}
+
 function DeleteTab(tab) {
     if (tabElements.length == 1) return;
 
@@ -128,6 +147,7 @@ function DeleteTab(tab) {
             }, 50);
 
             SelectActiveTab();
+            HidePopUp();
             return;
         }
     }
@@ -180,4 +200,50 @@ function HandleUpload(event) {
     };
     
     if (file != null) reader.readAsText(file);
+}
+
+let popUpContainer = document.querySelector('.popUpContainer');
+let popUpElement = document.querySelector('.popUp');
+let popUpTitle = document.querySelector('.popUpTitle');
+let popUpContent = document.querySelector('.popUpContent');
+let popUpPositive = document.querySelector('.popUpButtonTrue');
+let popUpNegative = document.querySelector('.popUpButtonFalse');
+
+function ShowPopUp(title, content, negative, positive) {
+    if (!title || !content || !negative || !positive) 
+        console.error("PopUp: Missing arguments");
+
+    popUpContainer.style.display = 'flex';
+
+    var createPopUp = setInterval(() => {
+        if (popUpContainer.style.display == 'flex') {
+            clearInterval(createPopUp);
+
+            popUpContainer.style.opacity = '1';
+            popUpContainer.style.zIndex = '5';
+            popUpElement.style.transform = 'scale(1)';
+        
+            popUpTitle.innerHTML = title;
+            popUpContent.innerHTML = content;
+        
+            popUpNegative.innerHTML = negative;
+            popUpPositive.innerHTML = positive;
+        }
+    }, 50);
+}
+
+function HidePopUp() {
+    popUpContainer.style.opacity = '0';
+    popUpContainer.style.zIndex = '-5';
+    popUpElement.style.transform = 'scale(0.5)';
+    
+    var destroyPopUp = setInterval(() => {
+        if (popUpContainer.style.opacity == '0') {
+            clearInterval(destroyPopUp);
+            popUpContainer.style.display = 'none';
+        }
+    }, 50);
+
+    popUpPositive.setAttribute('onclick', 'HidePopUp()');
+    popUpNegative.setAttribute('onclick', 'HidePopUp()');
 }

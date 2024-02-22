@@ -1,0 +1,247 @@
+* {
+    transition: 0.4s;
+    transition-timing-function: cubic-bezier(0.06, 0.47, 0.15, 0.89);
+    border-radius: 15px;
+    font-family: 'Poppins Medium', sans-serif;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+*::selection {
+    background-color: grey;
+    color: white;
+}
+
+body {
+    display: flex;
+    height: calc(100dvh - 16px);
+    overflow: hidden;
+}
+
+main {
+    background: lightgrey;
+    border-radius: 15px;
+    width: calc(100vw);
+    padding: 1em;
+}
+
+.gayBar {
+    margin-left: 8px;
+    border-radius: 75px;
+    background: lightgrey;
+    width: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.gayness {
+    background: grey;
+    height: 50%;
+    border-radius: 75px;
+}
+
+header.navArea {
+    height: 3em;
+    background: grey;
+    display: flex;
+    padding: 1em;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+button, .clickable {
+    border-width: 0px;
+    cursor: pointer;
+}
+
+button:hover, .clickable:hover {
+    transform: scale(1.3);
+    box-shadow: rgb(0, 0, 0, 0.5) 0px 0px 5px;
+}
+
+button:active, .clickable:active {
+    transition-duration: 0.1s;
+    transform: scale(0.8);
+    box-shadow: none;
+}
+
+button:focus, .clickable:focus {
+    outline: 4px solid rgba(0, 0, 0, 0.1);
+}
+
+button.settingsButton {
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 100px;
+}
+
+button.settingsButton:hover {
+    transform: scale(1.3) rotate(180deg);
+}
+
+nav.profileSection {
+    background: darkgrey;
+    height: calc(100% - 14px);
+    width: 100%;
+    margin-left: 8px;
+    padding: 7px 7px;
+    border-radius: 75px;
+    display: flex;
+}
+.tabs {
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    overflow-x: scroll;
+    max-width: calc(98.98vw - 280px);
+}
+
+.tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.tab {
+    background: lightgrey;
+    color: rgb(69, 69, 69);
+    width: 100%;
+    margin: 0px 3px;
+    padding: 5px 5px;
+    padding-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    opacity: 0.7;
+    transform: scale(0.95);
+    transition-duration: 0.7s;
+}
+
+.active {
+    background: white;
+    transform: scale(1);
+    border-bottom: 4px solid rgba(0, 0, 0, 0.45);
+}
+
+.active input {
+    font-family: 'Poppins Bold', sans-serif;
+}
+
+.active:hover {
+    transform: scale(1.05) !important;
+}
+
+.active:active {
+    transform: scale(0.95) !important;
+}
+
+.tab:hover {
+    transform: scale(1);
+    box-shadow: none;
+    opacity: 1;
+}
+
+.tab:active {
+    transform: scale(0.9);
+}
+
+.tabName {
+    border: none;
+    padding: 0px 10px;
+    background: transparent;
+    min-width: 0px;
+}
+
+.tabName:hover, .tabName:active, .tabName:focus {
+    transform: scale(1);
+    outline: none;
+    box-shadow: none;
+}
+
+.tabCounter {
+    font-size: 1.4em;
+    margin-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'Poppins Bold', sans-serif;
+    background: lightgray;
+    text-align: center;
+    min-width: 35px;
+    max-width: 35px;
+}
+
+.newTab {
+    aspect-ratio: 1;
+    background-color: lightgray;
+    margin-left: 10px;
+}
+
+.newTab img {
+    width: 1.5em;
+}
+
+.closeTab {
+    aspect-ratio: 1;
+    background-color: transparent;
+    margin-left: 10px;
+}
+
+.closeTab:hover {
+    background-color: darkgrey;
+}
+
+.closeTab img {
+    width: 1em;
+}
+
+.circleIconButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+}
+
+.circleIconButton img {
+    border-radius: 0px;
+}
+
+.characterInfo {
+    background-color: darkgrey;
+    padding: 1em 2em;
+    display: flex;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
+.characterName {
+    width: 100%;
+    background: rgb(188, 188, 188);
+    border: none;
+    font-size: 1.5em;
+    font-family: 'Poppins Bold', sans-serif;
+    margin-right: 1em;
+    padding: 0em 1em;
+    cursor: text;
+}
+
+.characterName:hover {
+    transform: scale(1.025);
+}
+
+.characterName:active {
+    transform: scale(0.975);
+}
+
+.characterName:focus {
+    background-color: lightgrey;
+}
+
+.characterActions {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.characterActions .circleIconButton {
+    height: 4em;
+    aspect-ratio: 1;
+}

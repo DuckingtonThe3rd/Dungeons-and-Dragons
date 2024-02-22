@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dice Roller</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <link rel="stylesheet" href="stylesheets/fonts.css">
+</head>
+
+<body>
+  <main>
+    <header class="navArea">
+      <button class="settingsButton circleIconButton" type="button" aria-label="Settings">
+        <img src="icons/gear.svg" alt="Gear Icon">
+      </button>
+      <nav class="profileSection">
+        <div class="tabCounter">1</div>
+        <div class="tabs">
+          <div class="tab clickable" onclick="SelectTab(this)">
+            <input tabindex="0" type="text" aria-label="Player Name" class="tabName clickable" value="Dungeon Master" autocomplete="off" autocorrect="off" spellcheck="false" oninput="UpdateLocal()">
+            <button class="closeTab circleIconButton" type="button" aria-label="Close Tab" onmousedown="DeleteTab(this.parentElement)" onclick="DeleteTab(this.parentElement)">
+              <img src="icons/x.svg" alt="Plus Icon">
+            </button>
+          </div>
+        </div>
+        <button class="newTab circleIconButton" type="button" aria-label="New Tab" onclick="NewTab()">
+          <img src="icons/plus.svg" alt="Plus Icon">
+        </button>
+      </nav>
+    </header>
+    <section class="characterInfo">
+      <input autocomplete="off" autocorrect="off" spellcheck="false"  oninput="UpdateGlobal()" class="characterName clickable" type="text" aria-label="Player Name"  value="Dungeon Master">
+      <div class="characterActions">
+        <button class="circleIconButton" type="button" aria-label="Download JSON" onclick="DownloadActiveProfile()">
+          <img src="icons/download.svg" alt="Download Icon">
+        </button>
+        <button class="circleIconButton" type="button" aria-label="Upload JSON" onclick="UploadActiveProfile()">
+          <img src="icons/upload.svg" alt="Download Icon">
+        </button>
+        <button class="circleIconButton" type="button" aria-label="Open Sheet">
+          <img src="icons/open.svg" alt="Open Icon">
+        </button>
+      </div>
+    </section>
+  </main>
+  <div class="gayBar">
+    <div class="gayness"></div>
+  </div>
+</body>
+<script src="scripts/interface.js"></script>
+</html>

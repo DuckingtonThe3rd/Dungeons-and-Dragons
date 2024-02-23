@@ -34,7 +34,7 @@
         <div class="tabs">
           <div class="tab clickable" onclick="SelectTab(this)">
             <input tabindex="0" type="text" aria-label="Player Name" class="tabName clickable" value="Dungeon Master" autocomplete="off" autocorrect="off" spellcheck="false" oninput="UpdateLocal()">
-            <button class="closeTab circleIconButton" type="button" aria-label="Close Tab" onmousedown="RequestDeleteTab(this.parentElement)" onclick="DeleteTab(this.parentElement)">
+            <button class="closeTab circleIconButton" type="button" aria-label="Close Tab" onmousedown="RequestDeleteTab(this.parentElement)" onclick="RequestDeleteTab(this.parentElement)">
               <img src="icons/x.svg" alt="Plus Icon">
             </button>
           </div>

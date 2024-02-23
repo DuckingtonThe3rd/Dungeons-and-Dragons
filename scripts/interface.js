@@ -116,9 +116,12 @@ function SelectTab(tab) {
     }
 }
 
+
 function RequestDeleteTab(tab) {
     ShowPopUp('Delete Character?', 'This will permanently delete this character! Make sure to backup to JSON first', 'Nevermind', 'Delete');
-    popUpPositive.setAttribute('onclick', 'DeleteTab(' + tab + ')');
+    popUpPositive.onclick = function() {
+        DeleteTab(tab);
+    };
 }
 
 function DeleteTab(tab) {

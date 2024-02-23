@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dice Roller</title>
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
   <link rel="stylesheet" href="stylesheets/style.css">
   <link rel="stylesheet" href="stylesheets/fonts.css">
 </head>
@@ -17,16 +17,30 @@
       <h1 class="popUpTitle">Title Here</h1>
       <p class="popUpContent">Explain the reason for this pop up here</p>
       <div class="popUpButtons">
-        <button type="button" class="popUpButton popUpButtonFalse" onclick="HidePopUp()">No</button>
-        <button type="button" class="popUpButton popUpButtonTrue" onclick="HidePopUp()">Yes</button>
+        <button type="button" class="popUpButton popUpButtonFalse" onclick="HidePopUp()" disabled>No</button>
+        <button type="button" class="popUpButton popUpButtonTrue" onclick="HidePopUp()" disabled>Yes</button>
       </div>
     </div>
   </div>
 
+  <section class="settingsPanel">
+    <div class="settingsTitleContainer">
+        <img src="icons/gear.svg" alt="Gear Icon">
+        <h1 class="settingsTitle">Settings</h1>
+    </div>
+    <div class="settingsArea">
+      
+    </div>
+    <button class="closeSettingsButton" type="button" onclick="CloseSettings()">
+      <img src="icons/floppy.svg" alt="Save Icon" class="saveIcon">
+      Save
+    </button>
+  </section>
+
   <main>
     <header>
     <section class="navArea">
-      <button class="settingsButton circleIconButton" type="button" aria-label="Settings">
+      <button class="settingsButton circleIconButton" type="button" aria-label="Settings" onclick="OpenSettings()">
         <img src="icons/gear.svg" alt="Gear Icon">
       </button>
       <nav class="profileSection">

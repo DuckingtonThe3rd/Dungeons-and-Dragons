@@ -27,7 +27,7 @@ document.addEventListener("keydown", function (event) {
 
 document.addEventListener("keydown", function (event) {
     if (event.shiftKey && event.key === "W") {
-        DeleteTab(tabElements[activeElement].element);
+        RequestDeleteTab(tabElements[activeElement].element);
         event.preventDefault();
     }
 });
@@ -41,7 +41,7 @@ document.addEventListener("keydown", function (event) {
 
 document.addEventListener("keydown", function (event) {
     if (event.shiftKey && event.key === "w") {
-        DeleteTab(tabElements[activeElement].element);
+        RequestDeleteTab(tabElements[activeElement].element);
         event.preventDefault();
     }
 });
@@ -96,7 +96,7 @@ function SelectActiveTab() {
         tabData.element.firstElementChild.value = tabData.profile.name;
         if (index == activeElement)
             tabRenamer.value = tabData.profile.name;
-        
+
         if (index != activeElement) tabData.element.classList.remove('active');
         else tabData.element.classList.add('active');
     }
@@ -118,42 +118,42 @@ function SelectTab(tab) {
 
 
 function RequestDeleteTab(tab) {
-    ShowPopUp('Delete Character?', 'This will permanently delete this character! Make sure to backup to JSON first', 'Nevermind', 'Delete');
-    popUpPositive.onclick = function() {
-        DeleteTab(tab);
-    };
-}
-
-function DeleteTab(tab) {
     if (tabElements.length == 1) return;
 
     for (let index = 0; index < tabElements.length; index++) {
         const tabData = tabElements[index];
 
         if (tabData.element == tab) {
-            tabElements.splice(index, 1);
-            if (index < activeElement) activeElement--;
-            SelectActiveTab();
-
-            tabData.element.style.transform = 'scale(0.25)';
-            tabData.element.style.width = '0px';
-            tabData.element.style.padding = '0px';
-            tabData.element.style.margin = '0px';
-            tabData.element.style.opacity = '0';
-
-            var destroyTab = setInterval(() => {
-                if (tabData.element.style.transform == 'scale(0.25)') {
-                    clearInterval (destroyTab);
-                    tabData.element.remove();
-                    SelectActiveTab();
-                }
-            }, 50);
-
-            SelectActiveTab();
-            HidePopUp();
-            return;
+            ShowPopUp('Delete Character?', 'This will permanently delete "' + tabData.profile.name + '"! Make sure to backup to JSON first', 'Cancel', 'Delete');
+            popUpPositive.onclick = function () {
+                DeleteTab(tabData);
+            };
         }
     }
+}
+
+function DeleteTab(tabData) {
+    tabElements.splice(tabElements.indexOf(tabData), 1);
+    if (tabElements[tabData] < activeElement) activeElement--;
+    SelectActiveTab();
+
+    tabData.element.style.transform = 'scale(0.25)';
+    tabData.element.style.width = '0px';
+    tabData.element.style.padding = '0px';
+    tabData.element.style.margin = '0px';
+    tabData.element.style.opacity = '0';
+
+    var destroyTab = setInterval(() => {
+        if (tabData.element.style.transform == 'scale(0.25)') {
+            clearInterval(destroyTab);
+            tabData.element.remove();
+            SelectActiveTab();
+        }
+    }, 350);
+
+    SelectActiveTab();
+    HidePopUp();
+    return;
 }
 
 function DownloadActiveProfile() {
@@ -194,14 +194,14 @@ function HandleUpload(event) {
 
     var reader = new FileReader();
 
-    reader.onload = function() {
+    reader.onload = function () {
         var oldIndex = tabElements[activeElement].profile.index;
         tabElements[activeElement].profile = JSON.parse(reader.result);
         tabElements[activeElement].index = oldIndex;
 
         SelectActiveTab();
     };
-    
+
     if (file != null) reader.readAsText(file);
 }
 
@@ -213,10 +213,14 @@ let popUpPositive = document.querySelector('.popUpButtonTrue');
 let popUpNegative = document.querySelector('.popUpButtonFalse');
 
 function ShowPopUp(title, content, negative, positive) {
-    if (!title || !content || !negative || !positive) 
+    if (!title || !content || !negative || !positive)
         console.error("PopUp: Missing arguments");
 
+    popUpPositive.disabled = false;
+    popUpNegative.disabled = false;
+
     popUpContainer.style.display = 'flex';
+    popUpPositive.focus();
 
     var createPopUp = setInterval(() => {
         if (popUpContainer.style.display == 'flex') {
@@ -225,10 +229,10 @@ function ShowPopUp(title, content, negative, positive) {
             popUpContainer.style.opacity = '1';
             popUpContainer.style.zIndex = '5';
             popUpElement.style.transform = 'scale(1)';
-        
+
             popUpTitle.innerHTML = title;
             popUpContent.innerHTML = content;
-        
+
             popUpNegative.innerHTML = negative;
             popUpPositive.innerHTML = positive;
         }
@@ -239,7 +243,7 @@ function HidePopUp() {
     popUpContainer.style.opacity = '0';
     popUpContainer.style.zIndex = '-5';
     popUpElement.style.transform = 'scale(0.5)';
-    
+
     var destroyPopUp = setInterval(() => {
         if (popUpContainer.style.opacity == '0') {
             clearInterval(destroyPopUp);
@@ -249,4 +253,16 @@ function HidePopUp() {
 
     popUpPositive.setAttribute('onclick', 'HidePopUp()');
     popUpNegative.setAttribute('onclick', 'HidePopUp()');
+
+    popUpPositive.disabled = true;
+    popUpNegative.disabled = true;
+}
+
+let settingsMenu = document.querySelector('.settingsPanel');
+function OpenSettings() {
+    settingsMenu.style.transform = 'translateX(0%)';
+}
+
+function CloseSettings() {
+    settingsMenu.style.transform = 'translateX(-100%)';
 }

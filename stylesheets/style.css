@@ -18,8 +18,12 @@ body {
     overflow: hidden;
 }
 
+img {
+    border-radius: 0;
+}
+
 main {
-    background: lightgrey;
+    background: rgb(230, 230, 230);
     border-radius: 15px;
     width: calc(100vw);
     padding: 1em;
@@ -43,30 +47,34 @@ main {
 
 .navArea {
     height: 3em;
-    background: grey;
+    background: #2c2c2c;
     display: flex;
     padding: 1em;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
 }
 
-button, .clickable {
+button,
+.clickable {
     border-width: 0px;
     cursor: pointer;
 }
 
-button:hover, .clickable:hover {
+button:hover,
+.clickable:hover {
     transform: scale(1.3);
     box-shadow: rgb(0, 0, 0, 0.5) 0px 0px 5px;
 }
 
-button:active, .clickable:active {
+button:active,
+.clickable:active {
     transition-duration: 0.1s;
     transform: scale(0.8);
     box-shadow: none;
 }
 
-button:focus, .clickable:focus {
+button:focus,
+.clickable:focus {
     outline: 4px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -84,8 +92,13 @@ button.settingsButton:active {
     transform: scale(0.8);
 }
 
+button.settingsButton:focus,
+button.newTab:focus {
+    outline: 4px solid rgba(255, 255, 255, 0.1);
+}
+
 nav.profileSection {
-    background: darkgrey;
+    background: #434343;
     height: calc(100% - 14px);
     width: 100%;
     margin-left: 8px;
@@ -93,13 +106,14 @@ nav.profileSection {
     border-radius: 75px;
     display: flex;
 }
+
 .tabs {
     display: flex;
     margin: 0px;
     padding: 0px;
     width: 100%;
     overflow-x: scroll;
-    max-width: calc(98.98vw - 280px);
+    max-width: calc(98.98vw - 265px);
 }
 
 .tabs::-webkit-scrollbar {
@@ -107,10 +121,9 @@ nav.profileSection {
 }
 
 .tab {
-    background: lightgrey;
+    background: gray;
     color: rgb(69, 69, 69);
     width: 100%;
-    margin: 0px 3px;
     padding: 5px 5px;
     padding-left: 20px;
     display: flex;
@@ -120,12 +133,12 @@ nav.profileSection {
     transition-duration: 0.3s;
 }
 
-.active {
-    background: white;
+.tab.active {
+    background: lightgray;
     border-bottom: 4px solid rgba(0, 0, 0, 0.45);
 }
 
-.active input {
+.tab.active input {
     font-family: 'Poppins Bold', sans-serif;
 }
 
@@ -146,7 +159,9 @@ nav.profileSection {
     min-width: 0px;
 }
 
-.tabName:hover, .tabName:active, .tabName:focus {
+.tabName:hover,
+.tabName:active,
+.tabName:focus {
     transform: scale(1);
     outline: none;
     box-shadow: none;
@@ -172,6 +187,7 @@ nav.profileSection {
 
 .newTab:hover {
     transform: scale(1.3) rotate(90deg);
+    background-color: white;
 }
 
 .newTab:active {
@@ -209,8 +225,9 @@ nav.profileSection {
 }
 
 .characterInfo {
-    background-color: darkgrey;
-    padding: 1em 2em;
+    background-color: gray;
+    padding: 1em;
+    padding-right: 2em;
     display: flex;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
@@ -274,10 +291,15 @@ nav.profileSection {
     background: white;
     box-shadow: rgb(0, 0, 0, 0.25) 0px 0px 5px;
 
-    width: 25em;
+    min-width: 25em;
+    max-width: 100vw;
     padding: 2em;
 
     transform: scale(0.5);
+}
+
+.popUpContent {
+    max-width: 25em;
 }
 
 .popUpTitle {
@@ -290,7 +312,7 @@ nav.profileSection {
 }
 
 .popUpButtonTrue {
-    background: grey;
+    background-color: rgb(69, 69, 69);
     color: white;
 }
 
@@ -302,7 +324,7 @@ section.settingsPanel {
     height: calc(100% - 5em);
     z-index: 4;
     transform: translateX(-100%);
-    
+
     min-width: 20em;
     width: 30vw;
 
@@ -332,7 +354,7 @@ section.settingsPanel .settingsArea {
     background: rgb(230, 230, 230);
     height: 100%;
     overflow-y: scroll;
-    padding: 1em;
+    padding: 1em 2em;
 }
 
 section.settingsPanel .settingsArea::-webkit-scrollbar {
@@ -350,7 +372,8 @@ section.settingsPanel .closeSettingsButton {
     filter: invert(1);
 }
 
-section.settingsPanel .closeSettingsButton:hover {
+section.settingsPanel .closeSettingsButton:hover,
+section.settingsPanel .closeSettingsButton:focus {
     transform: scale(1.1);
     box-shadow: none;
 }
@@ -361,4 +384,83 @@ section.settingsPanel .closeSettingsButton:active {
 
 section.settingsPanel .closeSettingsButton img {
     border-radius: 0;
+}
+
+section.settingsPanel .sectionTitleText {
+    font-family: 'Poppins Light', sans-serif;
+    font-size: 1.4em;
+}
+
+section.settingsPanel .sectionTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    gap: 0.5em;
+
+    background: transparent;
+}
+
+section.settingsPanel .sectionTitle:hover {
+    transform: scale(1.05);
+    box-shadow: none;
+}
+
+section.settingsPanel .sectionTitle:active {
+    transform: scale(1);
+}
+
+section.settingsPanel .sectionTitle:focus h2,
+section.settingsPanel .sectionTitle:focus {
+    outline: none;
+    font-family: 'Poppins Bold', sans-serif;
+}
+
+section.settingsPanel .sectionTitle .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    transform: translateX(-8%);
+    gap: 0.5em;
+
+    background: transparent;
+}
+
+section.settingsPanel .sectionTitle img {
+    height: 1.5em;
+}
+
+section.settingsPanel .settingsGroupContent {
+    background: lightgray;
+    opacity: 0;
+
+    height: 0;
+    padding: 0;
+}
+
+section.settingsPanel .settingsGroupContent.active {
+    height: auto;
+    opacity: 1;
+    padding: 1em;
+    margin-bottom: 3em;
+}
+
+section.settingsPanel .sectionTitle .arrow {
+    position: relative;
+    right: 10%;
+    opacity: 0;
+}
+
+section.settingsPanel .sectionTitle .arrow.active {
+    transform: rotate(90deg);
+}
+
+section.settingsPanel .sectionTitle:hover .arrow,
+section.settingsPanel .sectionTitle:focus .arrow {
+    position: relative;
+    right: 0%;
+    opacity: 1;
 }

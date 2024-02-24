@@ -116,6 +116,12 @@ function SelectTab(tab) {
     }
 }
 
+function RequestUploadActiveProfile() {
+    ShowPopUp('Overwrite Character?', 'This will permanently replace "' + tabElements[activeElement].profile.name + '"! Make sure to backup to JSON first', 'Cancel', 'Overwrite');
+    popUpPositive.onclick = function () {
+        UploadActiveProfile();
+    };
+}
 
 function RequestDeleteTab(tab) {
     if (tabElements.length == 1) return;
@@ -183,6 +189,8 @@ function UploadActiveProfile() {
     document.body.append(uploader);
     uploader.addEventListener('change', HandleUpload);
     uploader.click();
+    
+    HidePopUp();
 }
 
 function HandleUpload(event) {
@@ -196,7 +204,11 @@ function HandleUpload(event) {
 
     reader.onload = function () {
         var oldIndex = tabElements[activeElement].profile.index;
-        tabElements[activeElement].profile = JSON.parse(reader.result);
+        try {
+            tabElements[activeElement].profile = JSON.parse(reader.result);
+        } catch {
+            ShowPopUp('Upload Error', 'The file you uploaded was either not a compatible JSON file or was corrupted', 'Close', 'Okay');
+        }
         tabElements[activeElement].index = oldIndex;
 
         SelectActiveTab();
@@ -213,9 +225,6 @@ let popUpPositive = document.querySelector('.popUpButtonTrue');
 let popUpNegative = document.querySelector('.popUpButtonFalse');
 
 function ShowPopUp(title, content, negative, positive) {
-    if (!title || !content || !negative || !positive)
-        console.error("PopUp: Missing arguments");
-
     popUpPositive.disabled = false;
     popUpNegative.disabled = false;
 
@@ -249,7 +258,7 @@ function HidePopUp() {
             clearInterval(destroyPopUp);
             popUpContainer.style.display = 'none';
         }
-    }, 50);
+    }, 300);
 
     popUpPositive.setAttribute('onclick', 'HidePopUp()');
     popUpNegative.setAttribute('onclick', 'HidePopUp()');
@@ -259,10 +268,28 @@ function HidePopUp() {
 }
 
 let settingsMenu = document.querySelector('.settingsPanel');
+let allButtons = settingsMenu.querySelectorAll("button, input");
 function OpenSettings() {
     settingsMenu.style.transform = 'translateX(0%)';
+    allButtons.forEach((clickable) => {
+        clickable.disabled = false;
+    });
+    // allButtons[1].focus();
 }
 
 function CloseSettings() {
     settingsMenu.style.transform = 'translateX(-100%)';
+    allButtons.forEach((clickable) => {
+        clickable.disabled = true;
+    });
+}
+
+function ToggleSettingGroup(group, arrow) {
+    if (group.classList.contains('active')) {
+        group.classList.remove('active');
+        arrow.style.transform = 'rotate(0deg)';
+    } else {
+        group.classList.add('active');
+        arrow.style.transform = 'rotate(90deg)';
+    }
 }

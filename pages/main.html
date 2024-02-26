@@ -6,13 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dice Roller</title>
-  <link rel="icon" type="image/png" href="images/favicon.png" />
-  <link rel="stylesheet" href="stylesheets/style.css">
-  <link rel="stylesheet" href="stylesheets/fonts.css">
+  <link rel="icon" type="image/png" href="../images/favicon.png" />
+  <link rel="stylesheet" href="../stylesheets/style.css">
+  <link rel="stylesheet" href="../stylesheets/fonts.css">
 </head>
 
 <body>
-  <div class="popUpContainer" id="popUpContainer">
+  <div class="disablePage"></div>
+
+  <div class="popUpContainer">
     <div class="popUp">
       <h1 class="popUpTitle">Title Here</h1>
       <p class="popUpContent">Explain the reason for this pop up here</p>
@@ -25,15 +27,15 @@
 
   <section class="settingsPanel">
     <div class="settingsTitleContainer">
-        <img src="icons/gear.svg" alt="Gear Icon">
+        <img src="../icons/gear.svg" alt="Gear Icon">
         <h1 class="settingsTitle">Settings</h1>
     </div>
     <div class="settingsArea">
       <section class="settingsGroup">
         <button class="sectionTitle" type="button" aria-label="Toggle Sidebar Section" onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
-          <img src="icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
+          <img src="../icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
           <div class="title">
-            <img src="icons/layout-sidebar-inset-reverse.svg" alt="Sidebar Icon">
+            <img src="../icons/layout-sidebar-inset-reverse.svg" alt="Sidebar Icon">
             <h2 class="sectionTitleText">Sidebar</h2>
           </div>
         </button>
@@ -44,9 +46,9 @@
 
       <section class="settingsGroup">
         <button class="sectionTitle" type="button" aria-label="Toggle Profiles Section" onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
-          <img src="icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
+          <img src="../icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
           <div class="title">
-            <img src="icons/people.svg" alt="Profiles Icon">
+            <img src="../icons/people.svg" alt="Profiles Icon">
             <h2 class="sectionTitleText">Profiles</h2>
           </div>
         </button>
@@ -57,9 +59,9 @@
 
       <section class="settingsGroup">
         <button class="sectionTitle" type="button" aria-label="Toggle Appearence Section" onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
-          <img src="icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
+          <img src="../icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
           <div class="title">
-            <img src="icons/palette.svg" alt="Palette Icon">
+            <img src="../icons/palette.svg" alt="Palette Icon">
             <h2 class="sectionTitleText">Appearence</h2>
           </div>
         </button>
@@ -70,9 +72,9 @@
       
       <section class="settingsGroup">
         <button class="sectionTitle" type="button" aria-label="Toggle Backups Section" onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
-          <img src="icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
+          <img src="../icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
           <div class="title">
-            <img src="icons/hdd.svg" alt="Backup Icon">
+            <img src="../icons/hdd.svg" alt="Backup Icon">
             <h2 class="sectionTitleText">Backups</h2>
           </div>
         </button>
@@ -83,9 +85,9 @@
       
       <section class="settingsGroup">
         <button class="sectionTitle" type="button" aria-label="Toggle Warnings Section" onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
-          <img src="icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
+          <img src="../icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
           <div class="title">
-            <img src="icons/exclamation-triangle.svg" alt="Warning Icon">
+            <img src="../icons/exclamation-triangle.svg" alt="Warning Icon">
             <h2 class="sectionTitleText">Warnings</h2>
           </div>
         </button>
@@ -96,7 +98,7 @@
 
     </div>
     <button class="closeSettingsButton" type="submit" onclick="CloseSettings()" disabled>
-      <img src="icons/floppy.svg" alt="Save Icon" class="saveIcon">
+      <img src="../icons/floppy.svg" alt="Save Icon" class="saveIcon">
       Save
     </button>
   </section>
@@ -105,20 +107,20 @@
     <header>
     <section class="navArea">
       <button class="settingsButton circleIconButton" type="button" aria-label="Settings" onclick="OpenSettings()">
-        <img src="icons/gear.svg" alt="Gear Icon">
+        <img src="../icons/gear.svg" alt="Gear Icon">
       </button>
       <nav class="profileSection">
         <div class="tabCounter">1</div>
         <div class="tabs">
-          <div class="tab clickable" onclick="SelectTab(this)">
+          <div class="tab clickable" onclick="SelectTab(this)" onauxclick="MiddleClickDeleteTab(event, this)">
             <input tabindex="0" type="text" aria-label="Player Name" class="tabName clickable" value="Dungeon Master" autocomplete="off" autocorrect="off" spellcheck="false" oninput="UpdateLocal()">
             <button class="closeTab circleIconButton" type="button" aria-label="Close Tab" onmousedown="RequestDeleteTab(this.parentElement)" onclick="RequestDeleteTab(this.parentElement)">
-              <img src="icons/x.svg" alt="Plus Icon">
+              <img src="../icons/x.svg" alt="Close Icon">
             </button>
           </div>
         </div>
         <button class="newTab circleIconButton" type="button" aria-label="New Tab" onclick="NewTab()">
-          <img src="icons/plus.svg" alt="Plus Icon">
+          <img src="../icons/plus.svg" alt="Plus Icon">
         </button>
       </nav>
     </section>
@@ -126,13 +128,13 @@
       <input autocomplete="off" autocorrect="off" spellcheck="false"  oninput="UpdateGlobal()" class="characterName clickable" type="text" aria-label="Player Name"  value="Dungeon Master">
       <div class="characterActions">
         <button class="circleIconButton" type="button" aria-label="Download JSON" onclick="DownloadActiveProfile()">
-          <img src="icons/download.svg" alt="Download Icon">
+          <img src="../icons/download.svg" alt="Download Icon">
         </button>
         <button class="circleIconButton" type="button" aria-label="Upload JSON" onclick="RequestUploadActiveProfile()">
-          <img src="icons/upload.svg" alt="Download Icon">
+          <img src="../icons/upload.svg" alt="Upload Icon">
         </button>
-        <button class="circleIconButton" type="button" aria-label="Open Sheet">
-          <img src="icons/open.svg" alt="Open Icon">
+        <button class="circleIconButton" type="button" aria-label="Open Sheet" onclick="NotImplemented()">
+          <img src="../icons/open.svg" alt="Open Icon">
         </button>
       </div>
     </section>
@@ -142,5 +144,6 @@
     <div class="gayness"></div>
   </div>
 </body>
-<script src="scripts/interface.js"></script>
+<script src="../scripts/data.js"></script>
+<script src="../scripts/interface.js"></script>
 </html>

@@ -16,6 +16,7 @@ body {
     display: flex;
     height: calc(100dvh - 16px);
     overflow: hidden;
+    border-radius: 0;
 }
 
 img {
@@ -75,7 +76,7 @@ button:active,
 
 button:focus,
 .clickable:focus {
-    outline: 4px solid rgba(0, 0, 0, 0.1);
+    outline: 4px solid rgba(0, 0, 0, 0.3);
 }
 
 button.settingsButton {
@@ -94,7 +95,7 @@ button.settingsButton:active {
 
 button.settingsButton:focus,
 button.newTab:focus {
-    outline: 4px solid rgba(255, 255, 255, 0.1);
+    outline: 4px solid rgba(255, 255, 255, 0.3);
 }
 
 nav.profileSection {
@@ -181,13 +182,11 @@ nav.profileSection {
 
 .newTab {
     aspect-ratio: 1;
-    background-color: lightgray;
     margin-left: 10px;
 }
 
 .newTab:hover {
     transform: scale(1.3) rotate(90deg);
-    background-color: white;
 }
 
 .newTab:active {
@@ -275,12 +274,6 @@ nav.profileSection {
     width: 100vw;
     height: 100dvh;
     z-index: -5;
-    display: none;
-
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
-    background: rgba(0, 0, 0, 0.25);
-    opacity: 0;
 
     display: flex;
     justify-content: center;
@@ -323,7 +316,7 @@ section.settingsPanel {
     padding: 2em;
     height: calc(100% - 5em);
     z-index: 4;
-    transform: translateX(-100%);
+    transform: translateX(-110%);
 
     min-width: 20em;
     width: 30vw;
@@ -423,7 +416,7 @@ section.settingsPanel .sectionTitle .title {
     align-items: center;
 
     width: 100%;
-    transform: translateX(-8%);
+    transform: translateX(-7%);
     gap: 0.5em;
 
     background: transparent;
@@ -462,5 +455,27 @@ section.settingsPanel .sectionTitle:hover .arrow,
 section.settingsPanel .sectionTitle:focus .arrow {
     position: relative;
     right: 0%;
+    opacity: 1;
+}
+
+.disablePage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    z-index: -3;
+    border-radius: 0;
+    opacity: 0;
+
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    background: rgba(0, 0, 0, 0.25);
+
+    transition-duration: 0.4s;
+}
+
+.disablePage.active {
+    z-index: 3;
     opacity: 1;
 }

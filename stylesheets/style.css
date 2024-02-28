@@ -132,6 +132,7 @@ nav.profileSection {
     opacity: 0.7;
     transform: scale(0.95);
     transition-duration: 0.3s;
+    box-sizing: unset;
 }
 
 .tab.active {
@@ -367,12 +368,12 @@ section.settingsPanel .closeSettingsButton {
 
 section.settingsPanel .closeSettingsButton:hover,
 section.settingsPanel .closeSettingsButton:focus {
-    transform: scale(1.1);
+    transform: scale(1.05);
     box-shadow: none;
 }
 
 section.settingsPanel .closeSettingsButton:active {
-    transform: scale(0.9);
+    transform: scale(0.95);
 }
 
 section.settingsPanel .closeSettingsButton img {
@@ -432,6 +433,8 @@ section.settingsPanel .settingsGroupContent {
 
     height: 0;
     padding: 0;
+
+    transform: scale(1.15);
 }
 
 section.settingsPanel .settingsGroupContent.active {
@@ -439,6 +442,8 @@ section.settingsPanel .settingsGroupContent.active {
     opacity: 1;
     padding: 1em;
     margin-bottom: 3em;
+
+    transform: scale(1);
 }
 
 section.settingsPanel .sectionTitle .arrow {
@@ -456,6 +461,66 @@ section.settingsPanel .sectionTitle:focus .arrow {
     position: relative;
     right: 0%;
     opacity: 1;
+}
+
+.settingOption {
+    padding: 1em;
+    border-bottom: 1px solid rgb(188, 188, 188);;
+    border-radius: 0;
+}
+
+.settingsGroupContent .settingOption:last-child {
+    border-bottom: none;
+}
+
+.settingOptionLabel {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.settingOptionLabel:hover {
+    transform: scale(1.05);
+}
+
+.settingOptionLabel:active {
+    transform: scale(0.95);
+}
+
+.settingOptionLabel .labelText {
+    font-size: 1em;
+}
+
+.switchBox  {
+    position: absolute;
+    opacity: 0;
+}
+
+.switchBox:focus ~ .switch  {
+    transform: scale(1.25);
+    outline: 4px solid rgba(0, 0, 0, 0.075);
+}
+
+.switch  {
+    width: 48px;
+    height: 24px;
+
+    background: darkgrey;
+    transition-duration: 0.2s;
+}
+
+.switch:hover {
+    transform: scale(1.2);
+}
+
+.switch:active {
+    transform: scale(0.8);
+}
+
+.switchBox:checked ~ .switch  {
+    background: rgb(69, 69, 69);
 }
 
 .disablePage {
@@ -478,4 +543,164 @@ section.settingsPanel .sectionTitle:focus .arrow {
 .disablePage.active {
     z-index: 3;
     opacity: 1;
+}
+
+.loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 7;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: rgb(230, 230, 230);
+    border-radius: 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.anchor {
+    position: relative;
+    bottom: 30px;
+    width: 80px;
+    height: 20px;
+    padding: 0;
+}
+
+.circle{
+    width:20px;
+    height:20px;
+    position: absolute;
+    border-radius: 100%;
+    background-color: #000;
+    left:0%;
+    animation: circle .5s alternate infinite ease;
+}
+
+@keyframes circle{
+    0%{
+        top:60px;
+        height:5px;
+        border-radius: 50px 50px 25px 25px;
+        transform: scaleX(1.7);
+    }
+    40%{
+        height:20px;
+        border-radius: 50%;
+        transform: scaleX(1);
+    }
+    100%{
+        top:0%;
+    }
+}
+.circle:nth-child(2){
+    animation-delay: .2s;
+    left:30px;
+}
+.circle:nth-child(3){
+    animation-delay: .3s;
+    left:60px;
+}
+
+.loader h1::after {
+    content: 'Loading';
+    font-family: 'Poppins Bold', sans-serif;
+    animation-name: load;
+    animation-duration: 20s;
+    animation-delay: 2s;
+}
+
+@keyframes load{
+    0% {
+        content: 'Loading';
+        opacity: 1;
+    }
+    4% {
+        opacity: 1;
+    }
+    7% {
+        content: 'Loading';
+        opacity: 0;
+    }
+    8% {
+        content: 'Preprocessing';
+        opacity: 0;
+    }
+    16% {
+        opacity: 1;
+    }
+    20% {
+        opacity: 1;
+    }
+    23% {
+        content: 'Preprocessing';
+        opacity: 0;
+    }
+    24% {
+        content: 'Setting up';
+        opacity: 0;
+    }
+    32% {
+        opacity: 1;
+    }
+    38% {
+        opacity: 1;
+    }
+    41% {
+        content: 'Setting up';
+        opacity: 0;
+    }
+    42% {
+        content: 'Fetching Cookies';
+        opacity: 0;
+    }
+    48% {
+        opacity: 1;
+    }
+    52% {
+        opacity: 1;
+    }
+    55% {
+        content: 'Fetching Cookies';
+        opacity: 0;
+    }
+    56% {
+        content: 'Updating Settings';
+        opacity: 0;
+    }
+    64% {
+        opacity: 1;
+    }
+    68% {
+        opacity: 1;
+    }
+    71% {
+        content: 'Updating Settings';
+        opacity: 0;
+    }
+    72% {
+        content: 'Almost Done';
+        opacity: 0;
+    }
+    74% {
+        opacity: 1;
+    }
+    79% {
+        opacity: 1;
+    }
+    82% {
+        content: 'Almost Done';
+        opacity: 0;
+    }
+    83% {
+        content: 'Loading';
+        opacity: 0;
+    }
+    87% {
+        opacity: 1;
+    }
 }

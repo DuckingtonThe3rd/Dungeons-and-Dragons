@@ -12,6 +12,15 @@
 </head>
 
 <body>
+  <div class="loader">
+    <div class="anchor">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+    <h1></h1>
+  </div>
+
   <div class="disablePage"></div>
 
   <div class="popUpContainer">
@@ -40,7 +49,31 @@
           </div>
         </button>
         <div class="settingsGroupContent active">
-          <div>section content</div>
+
+          <div class="settingOption">
+            <label class="settingOptionLabel" for="displaySidebar">
+              <div class="labelText">Display</div>
+              <input type="checkbox" class="switchBox" id="displaySidebar" checked>
+              <div class="switch"></div>
+            </label>
+          </div>
+
+          <div class="settingOption">
+            <label class="settingOptionLabel" for="monoSidebar">
+              <div class="labelText">Monochrome</div>
+              <input type="checkbox" class="switchBox" id="monoSidebar">
+              <div class="switch"></div>
+            </label>
+          </div>
+
+          <div class="settingOption">
+            <label class="settingOptionLabel" for="sidebarEffect">
+              <div class="labelText">Effects</div>
+              <input type="checkbox" class="switchBox" id="sidebarEffect">
+              <div class="switch"></div>
+            </label>
+          </div>
+
         </div>
       </section>
 
@@ -58,6 +91,35 @@
       </section>
 
       <section class="settingsGroup">
+        <button class="sectionTitle" type="button" aria-label="Toggle Audio Section" onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
+          <img src="../icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
+          <div class="title">
+            <img src="../icons/volume-up.svg" alt="Audio Icon">
+            <h2 class="sectionTitleText">Audio</h2>
+          </div>
+        </button>
+        <div class="settingsGroupContent active">
+          
+          <div class="settingOption">
+            <label class="settingOptionLabel" for="sfx">
+              <div class="labelText">SFX</div>
+              <input type="checkbox" class="switchBox" id="sfx" checked>
+              <div class="switch"></div>
+            </label>
+          </div>
+          
+          <div class="settingOption">
+            <label class="settingOptionLabel" for="music">
+              <div class="labelText">Music</div>
+              <input type="checkbox" class="switchBox" id="music">
+              <div class="switch"></div>
+            </label>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="settingsGroup">
         <button class="sectionTitle" type="button" aria-label="Toggle Appearence Section" onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
           <img src="../icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
           <div class="title">
@@ -66,7 +128,39 @@
           </div>
         </button>
         <div class="settingsGroupContent active">
-          <div>section content</div>
+          
+          <div class="settingOption">
+            <label class="settingOptionLabel" for="darkMode">
+              <div class="labelText">Dark Mode</div>
+              <input type="checkbox" class="switchBox" id="darkMode">
+              <div class="switch"></div>
+            </label>
+          </div>
+
+          <div class="settingOption">
+            <label class="settingOptionLabel" for="animations">
+              <div class="labelText">Animations</div>
+              <input type="checkbox" class="switchBox" id="animations" checked>
+              <div class="switch"></div>
+            </label>
+          </div>
+
+          <div class="settingOption">
+            <label class="settingOptionLabel" for="infoBar">
+              <div class="labelText">Info Bar</div>
+              <input type="checkbox" class="switchBox" id="infoBar" checked>
+              <div class="switch"></div>
+            </label>
+          </div>
+
+          <div class="settingOption">
+            <label class="settingOptionLabel" for="history">
+              <div class="labelText">History</div>
+              <input type="checkbox" class="switchBox" id="history" checked>
+              <div class="switch"></div>
+            </label>
+          </div>
+
         </div>
       </section>
       
@@ -79,23 +173,18 @@
           </div>
         </button>
         <div class="settingsGroupContent active">
-          <div>section content</div>
+          
+          <div class="settingOption">
+            <label class="settingOptionLabel" for="useCookies">
+              <div class="labelText">Cookies</div>
+              <input type="checkbox" class="switchBox" id="useCookies" checked>
+              <div class="switch"></div>
+            </label>
+          </div>
+          
         </div>
       </section>
       
-      <section class="settingsGroup">
-        <button class="sectionTitle" type="button" aria-label="Toggle Warnings Section" onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
-          <img src="../icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
-          <div class="title">
-            <img src="../icons/exclamation-triangle.svg" alt="Warning Icon">
-            <h2 class="sectionTitleText">Warnings</h2>
-          </div>
-        </button>
-        <div class="settingsGroupContent active">
-          <div>section content</div>
-        </div>
-      </section>
-
     </div>
     <button class="closeSettingsButton" type="submit" onclick="CloseSettings()" disabled>
       <img src="../icons/floppy.svg" alt="Save Icon" class="saveIcon">
@@ -113,7 +202,7 @@
         <div class="tabCounter">1</div>
         <div class="tabs">
           <div class="tab clickable" onclick="SelectTab(this)" onauxclick="MiddleClickDeleteTab(event, this)">
-            <input tabindex="0" type="text" aria-label="Player Name" class="tabName clickable" value="Dungeon Master" autocomplete="off" autocorrect="off" spellcheck="false" oninput="UpdateLocal()">
+            <input tabindex="0" type="text" aria-label="Player Name" class="tabName clickable" value="Dungeon Master" placeholder="Name Here" autocomplete="off" autocorrect="off" spellcheck="false" oninput="UpdateLocal(this)">
             <button class="closeTab circleIconButton" type="button" aria-label="Close Tab" onmousedown="RequestDeleteTab(this.parentElement)" onclick="RequestDeleteTab(this.parentElement)">
               <img src="../icons/x.svg" alt="Close Icon">
             </button>
@@ -125,7 +214,7 @@
       </nav>
     </section>
     <section class="characterInfo">
-      <input autocomplete="off" autocorrect="off" spellcheck="false"  oninput="UpdateGlobal()" class="characterName clickable" type="text" aria-label="Player Name"  value="Dungeon Master">
+      <input autocomplete="off" autocorrect="off" spellcheck="false"  oninput="UpdateGlobal()" class="characterName clickable" type="text" aria-label="Player Name"  value="Dungeon Master" placeholder="Name Here">
       <div class="characterActions">
         <button class="circleIconButton" type="button" aria-label="Download JSON" onclick="DownloadActiveProfile()">
           <img src="../icons/download.svg" alt="Download Icon">
@@ -144,6 +233,5 @@
     <div class="gayness"></div>
   </div>
 </body>
-<script src="../scripts/data.js"></script>
 <script src="../scripts/interface.js"></script>
 </html>

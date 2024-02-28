@@ -2,25 +2,65 @@ class Profile {
     static activeIndex = 0;
     static list = [];
 
-    static get activeElement() {
+    static get ActiveElement() {
         return this.list[this.activeIndex];
     }
 
-    constructor(index, name, tab) {
+    static set ActiveElement(element) {
+        this.activeIndex = this.list.indexOf(element);
+    }
+
+    static get TabList() {
+        var tabList = [];
+        for (const currentProfile of this.list)
+            tabList.push(currentProfile.Tab);
+
+        return tabList;
+    }
+
+    static get Count() {
+        return this.list.length;
+    }
+
+    get Tab() {
+        return tabContainer.children[this.index];
+    }
+
+    constructor(index, name) {
         this.index = index;
         this.name = name;
-        this.tab = tab;
     }
 }
+
+const hoverableElements = document.querySelectorAll('input, button, .clickable, label');
+let hoverVolume = 0.02;
+let clickVolume = 0.07;
+let interact = false;
+
+for (const element of hoverableElements) {
+    element.addEventListener("mouseover", function () {
+        if (!interact) return;
+        const hoverSFX = new Audio('../audio/sfx/Click.wav');
+        hoverSFX.volume = hoverVolume;
+        hoverSFX.play();
+    });
+    element.addEventListener("mousedown", function () {
+        interact = true;
+        const clickSFX = new Audio('../audio/sfx/Click.wav');
+        clickSFX.volume = clickVolume;
+        clickSFX.play();
+    });
+}
+
 
 function NotImplemented() {
     ShowPopUp('Not Implemented', 'This feature is still work in progress. Try messing around with something else', 'Close', 'Okay');
 }
 
-let tabContainer = document.querySelector('.tabs');
-let tabCounter = document.querySelector('.tabCounter');
-let tabUI = tabContainer.firstElementChild.outerHTML;
-let tabRenamer = document.querySelector('.characterName');
+var tabContainer = document.querySelector('.tabs');
+var tabCounter = document.querySelector('.tabCounter');
+var tabUI = tabContainer.firstElementChild.outerHTML;
+var tabRenamer = document.querySelector('.characterName');
 
 Profile.list.push(new Profile(0, "Dungeon Master", tabUI));
 
@@ -35,85 +75,88 @@ document.addEventListener("keydown", function (event) {
 
 document.addEventListener("keydown", function (event) {
     if (event.shiftKey && (event.key === "W" || event.shiftKey && event.key === "w")) {
-        RequestDeleteTab(Profile.activeElement.tab);
+        RequestDeleteTab(Profile.ActiveElement.Tab);
         event.preventDefault();
     }
+});
+
+document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape")
+        HidePopUp();
+});
+
+
+let loader = document.querySelector('.loader');
+window.addEventListener("load", function () {
+    setTimeout(function() {
+        loader.style.opacity = '0';
+        loader.style.zIndex = '-6';
+    }, 3000);
+    DisableChildren(settingsMenu);
 });
 
 function NewTab() {
     if (Profile.list.length >= 99) return;
 
+    Profile.list.push(new Profile(Profile.Count, "New Character (" + Profile.Count + ")"));
     tabContainer.innerHTML += tabUI;
-    Profile.list.push(new Profile(Profile.list.length, "New Character (" + Profile.list.length + ")"));
 
+    UpdateFromData();
     SelectActiveTab();
-    var newTab = Profile.list[Profile.list.length - 1];
-    newTab.tab.firstElementChild.focus();
+
+    Profile.TabList[(Profile.Count - 1)].firstElementChild.focus();
 }
 
-function UpdateLocal() {
-    for (let index = 0; index < Profile.list.length; index++) {
-        const profile = Profile.list[index];
+function UpdateLocal(field) {
+    var profile = Profile.list[Profile.TabList.indexOf(field.parentElement)];
 
-        if (profile.tab.firstElementChild.value.replace(" ", "") == '')
-            profile.tab.firstElementChild.value = 'Unnamed';
+    if (field.value.replace(" ", "") == '')
+        field.value = '';
 
-        profile.name = profile.tab.firstElementChild.value;
-        if (index == Profile.activeIndex)
-            tabRenamer.value = profile.name;
-    }
+    profile.name = field.value;
+
+    UpdateFromData();
 }
 
 function UpdateGlobal() {
-    for (let index = 0; index < Profile.list.length; index++) {
-        const profile = Profile.list[index];
+    if (tabRenamer.value.replace(" ", "") == '')
+        tabRenamer.value = '';
 
-        if (profile.tab.firstElementChild.value.replace(" ", "") == '')
-            tabRenamer.value = 'Unnamed';
+    Profile.ActiveElement.name = tabRenamer.value;
 
-        if (index == Profile.activeIndex) {
-            profile.name = tabRenamer.value;
-            profile.tab.firstElementChild.value = profile.name;
-        }
-    }
+    UpdateFromData();
+}
+
+function UpdateFromData() {
+    for (const profile of Profile.list)
+        profile.Tab.firstElementChild.value = profile.name;
+
+    tabRenamer.value = Profile.ActiveElement.name;
 }
 
 function SelectActiveTab() {
-    if (Profile.activeIndex < 0) Profile.activeIndex = 0;
-    if (Profile.activeIndex >= Profile.list.length) Profile.activeIndex = Profile.list.length - 1;
+    if (Profile.activeIndex < 0)
+        Profile.activeIndex = 0;
+    else if (Profile.activeIndex >= Profile.Count)
+        Profile.activeIndex = Profile.Count - 1;
 
-    for (let index = 0; index < Profile.list.length; index++) {
-        const profile = Profile.list[index];
+    UpdateFromData();
 
-        var children = tabContainer.children;
-        profile.tab = children[index];
-        profile.tab.firstElementChild.value = profile.name;
-        if (index == Profile.activeIndex)
-            tabRenamer.value = profile.name;
+    Profile.list.forEach(profile => {
+        profile.Tab.classList.remove('active');
+    });
+    Profile.ActiveElement.Tab.classList.add('active');
 
-        if (index != Profile.activeIndex)
-            profile.tab.classList.remove('active');
-        else
-            profile.tab.classList.add('active');
-    }
-
-    tabCounter.innerHTML = Profile.list.length;
+    tabCounter.innerHTML = Profile.Count;
 }
 
 function SelectTab(tab) {
-    for (let index = 0; index < Profile.list.length; index++) {
-        const profile = Profile.list[index];
-
-        if (profile.tab == tab) {
-            Profile.activeIndex = index;
-            tabRenamer.value = profile.name;
-            SelectActiveTab();
-        }
-    }
+    Profile.activeIndex = Profile.TabList.indexOf(tab);
+    SelectActiveTab();
 }
 
 function RequestUploadActiveProfile() {
-    ShowPopUp('Overwrite Character?', 'This will permanently replace "' + Profile.activeElement.name + '"! Make sure to backup to JSON first', 'Cancel', 'Overwrite');
+    ShowPopUp('Overwrite Character?', 'This will permanently replace "' + Profile.ActiveElement.name + '"! Make sure to backup to JSON first', 'Cancel', 'Overwrite');
     popUpPositive.onclick = function () {
         UploadActiveProfile();
     };
@@ -129,31 +172,24 @@ function MiddleClickDeleteTab(event, tab) {
 function RequestDeleteTab(tab) {
     if (Profile.list.length == 1) return;
 
-    for (let index = 0; index < Profile.list.length; index++) {
-        const profile = Profile.list[index];
-
-        if (profile.tab == tab) {
-            ShowPopUp('Delete Character?', 'This will permanently delete "' + profile.name + '"! Make sure to backup to JSON first', 'Cancel', 'Delete');
-            popUpPositive.onclick = function () {
-                DeleteTab(profile);
-            };
-        }
-    }
+    var profile = Profile.list[Profile.TabList.indexOf(tab)];
+    ShowPopUp('Delete Character?', 'This will permanently delete "' + profile.name + '"! Make sure to backup to JSON first', 'Cancel', 'Delete');
+    popUpPositive.onclick = function () {
+        DeleteTab(profile);
+    };
 }
 
 function DeleteTab(profile) {
-    Profile.list.splice(Profile.list.indexOf(profile), 1);
+    index = Profile.list.indexOf(profile);
 
-    if (Profile.list[profile] < Profile.activeIndex) 
+    if (index < Profile.activeIndex)
         Profile.activeIndex--;
 
-    profile.tab.style.transform = 'scale(0.25)';
-    profile.tab.style.width = '0px';
-    profile.tab.style.padding = '0px';
-    profile.tab.style.margin = '0px';
-    profile.tab.style.opacity = '0';
+    Profile.list.splice(index, 1);
+    profile.Tab.remove();
 
-    profile.tab.remove();
+    for (const profile of Profile.list)
+        profile.index = Profile.list.indexOf(profile);
 
     SelectActiveTab();
     HidePopUp();
@@ -161,8 +197,8 @@ function DeleteTab(profile) {
 }
 
 function DownloadActiveProfile() {
-    Download(Profile.activeElement.name + " Profile Backup (" + new Date().getTime() + ")",
-        JSON.stringify(Profile.activeElement));
+    Download(Profile.ActiveElement.name + " Profile Backup (" + new Date().getTime() + ")",
+        JSON.stringify(Profile.ActiveElement));
 }
 
 function Download(fileName, content) {
@@ -182,6 +218,7 @@ var content;
 function UploadActiveProfile() {
     uploader = document.createElement('input');
     uploader.setAttribute('type', 'file');
+    uploader.setAttribute('accept', '.json');
     uploader.style.display = 'none';
 
     document.body.append(uploader);
@@ -201,13 +238,13 @@ function HandleUpload(event) {
     var reader = new FileReader();
 
     reader.onload = function () {
-        var oldIndex = Profile.activeElement.index;
+        var oldIndex = Profile.ActiveElement.index;
         try {
-            Profile.activeElement = JSON.parse(reader.result);
+            Profile.ActiveElement = JSON.parse(reader.result);
         } catch {
             ShowPopUp('Upload Error', 'The file you uploaded was either not a compatible JSON file or was corrupted', 'Close', 'Okay');
         }
-        Profile.activeElement.index = oldIndex;
+        Profile.ActiveElement.index = oldIndex;
 
         SelectActiveTab();
     };
@@ -215,12 +252,12 @@ function HandleUpload(event) {
     if (file != null) reader.readAsText(file);
 }
 
-let popUpContainer = document.querySelector('.popUpContainer');
-let popUpElement = document.querySelector('.popUp');
-let popUpTitle = document.querySelector('.popUpTitle');
-let popUpContent = document.querySelector('.popUpContent');
-let popUpPositive = document.querySelector('.popUpButtonTrue');
-let popUpNegative = document.querySelector('.popUpButtonFalse');
+var popUpContainer = document.querySelector('.popUpContainer');
+var popUpElement = document.querySelector('.popUp');
+var popUpTitle = document.querySelector('.popUpTitle');
+var popUpContent = document.querySelector('.popUpContent');
+var popUpPositive = document.querySelector('.popUpButtonTrue');
+var popUpNegative = document.querySelector('.popUpButtonFalse');
 
 function ShowPopUp(title, content, negative, positive) {
 
@@ -251,13 +288,12 @@ function HidePopUp() {
     DisableChildren(popUpContainer);
 }
 
-let settingsMenu = document.querySelector('.settingsPanel');
+var settingsMenu = document.querySelector('.settingsPanel');
 function OpenSettings() {
     settingsMenu.style.transform = 'translateX(0%)';
 
     DisableChildren(main);
     EnableChildren(settingsMenu);
-    // allButtons[1].focus();
 }
 
 function CloseSettings() {
@@ -269,16 +305,18 @@ function CloseSettings() {
 
 function ToggleSettingGroup(group, arrow) {
     if (group.classList.contains('active')) {
+        DisableChildren(group);
         group.classList.remove('active');
         arrow.style.transform = 'rotate(0deg)';
     } else {
+        EnableChildren(group);
         group.classList.add('active');
         arrow.style.transform = 'rotate(90deg)';
     }
 }
 
-let main = document.querySelector('main');
-let disablePage = document.querySelector('.disablePage');
+var main = document.querySelector('main');
+var disablePage = document.querySelector('.disablePage');
 function DisableChildren(element) {
     if (element == document.querySelector('main')) {
         disablePage.style.zIndex = '3';

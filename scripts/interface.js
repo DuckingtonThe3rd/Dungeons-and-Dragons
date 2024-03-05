@@ -40,13 +40,13 @@ let interact = false;
 for (const element of hoverableElements) {
     element.addEventListener("mouseover", function () {
         if (!interact) return;
-        const hoverSFX = new Audio('../audio/sfx/Click.wav');
+        const hoverSFX = new Audio('audio/sfx/Click.wav');
         hoverSFX.volume = hoverVolume;
         hoverSFX.play();
     });
     element.addEventListener("mousedown", function () {
         interact = true;
-        const clickSFX = new Audio('../audio/sfx/Click.wav');
+        const clickSFX = new Audio('audio/sfx/Click.wav');
         clickSFX.volume = clickVolume;
         clickSFX.play();
     });
@@ -267,7 +267,7 @@ var popUpNegative = document.querySelector('.popUpButtonFalse');
 
 let popVolume = 0.2;
 function ShowPopUp(title, content, negative, positive) {
-    const popSFX = new Audio('../audio/sfx/Pop.wav');
+    const popSFX = new Audio('audio/sfx/Pop.wav');
     popSFX.volume = popVolume;
     popSFX.play();
 

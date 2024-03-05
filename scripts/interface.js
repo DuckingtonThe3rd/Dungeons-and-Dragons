@@ -6,8 +6,8 @@ class Profile {
         return this.list[this.activeIndex];
     }
 
-    static set ActiveElement(element) {
-        this.activeIndex = this.list.indexOf(element);
+    static set ActiveElement(profile) {
+        this.list[this.activeIndex] = profile;
     }
 
     static get TabList() {
@@ -32,8 +32,8 @@ class Profile {
     }
 }
 
-const hoverableElements = document.querySelectorAll('input, button, .clickable, label');
-let hoverVolume = 0.02;
+const hoverableElements = document.querySelectorAll('input, button, .clickable, .tab, label');
+let hoverVolume = 0.01;
 let clickVolume = 0.07;
 let interact = false;
 
@@ -87,8 +87,12 @@ document.addEventListener("keydown", function (event) {
 
 
 let loader = document.querySelector('.loader');
+let loaderMask = document.querySelector('.loaderMask');
 window.addEventListener("load", function () {
-    setTimeout(function() {
+    setTimeout(function () {
+        loaderMask.style.height = '100vh';
+    }, 2000);
+    setTimeout(function () {
         loader.style.opacity = '0';
         loader.style.zIndex = '-6';
     }, 3000);
@@ -105,6 +109,7 @@ function NewTab() {
     SelectActiveTab();
 
     Profile.TabList[(Profile.Count - 1)].firstElementChild.focus();
+    SelectTab(Profile.TabList[Profile.Count - 1])
 }
 
 function UpdateLocal(field) {
@@ -228,6 +233,7 @@ function UploadActiveProfile() {
     HidePopUp();
 }
 
+// JSON parsing not working
 function HandleUpload(event) {
     const selectedFiles = event.target.files;
 
@@ -259,7 +265,11 @@ var popUpContent = document.querySelector('.popUpContent');
 var popUpPositive = document.querySelector('.popUpButtonTrue');
 var popUpNegative = document.querySelector('.popUpButtonFalse');
 
+let popVolume = 0.2;
 function ShowPopUp(title, content, negative, positive) {
+    const popSFX = new Audio('../audio/sfx/Pop.wav');
+    popSFX.volume = popVolume;
+    popSFX.play();
 
     DisableChildren(main);
     EnableChildren(popUpContainer);

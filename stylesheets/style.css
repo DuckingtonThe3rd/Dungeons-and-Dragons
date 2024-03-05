@@ -14,7 +14,7 @@
 
 body {
     display: flex;
-    height: calc(100dvh - 16px);
+    height: calc(100vh - 16px);
     overflow: hidden;
     border-radius: 0;
 }
@@ -273,7 +273,7 @@ nav.profileSection {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100dvh;
+    height: 100vh;
     z-index: -5;
 
     display: flex;
@@ -528,7 +528,7 @@ section.settingsPanel .sectionTitle:focus .arrow {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100dvh;
+    height: 100vh;
     z-index: -3;
     border-radius: 0;
     opacity: 0;
@@ -556,11 +556,29 @@ section.settingsPanel .sectionTitle:focus .arrow {
 
     background: rgb(230, 230, 230);
     border-radius: 0px;
+    transition: 0.7s;
 
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    filter: invert(100%);
+}
+
+.loaderMask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 8;
+    border-radius: 0px;
+    transition-timing-function: ease-in-out;
+
+    width: 100vw;
+    height: 0vh;
+
+    -webkit-backdrop-filter: invert(100%);
+    backdrop-filter: invert(100%);
 }
 
 .anchor {
@@ -579,6 +597,7 @@ section.settingsPanel .sectionTitle:focus .arrow {
     background-color: #000;
     left:0%;
     animation: circle .5s alternate infinite ease;
+    opacity: 0;
 }
 
 @keyframes circle{
@@ -587,14 +606,17 @@ section.settingsPanel .sectionTitle:focus .arrow {
         height:5px;
         border-radius: 50px 50px 25px 25px;
         transform: scaleX(1.7);
+        opacity: 1;
     }
     40%{
         height:20px;
         border-radius: 50%;
         transform: scaleX(1);
+        opacity: 1;
     }
     100%{
         top:0%;
+        opacity: 1;
     }
 }
 .circle:nth-child(2){

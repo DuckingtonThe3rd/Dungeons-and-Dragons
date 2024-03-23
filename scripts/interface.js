@@ -22,12 +22,15 @@ class Profile {
         return this.list.length;
     }
 
-    get Tab() {
-        return tabContainer.children[this.index];
+    get Index() {
+        return Profile.list.indexOf(this);  
     }
 
-    constructor(index, name) {
-        this.index = index;
+    get Tab() {
+        return tabContainer.children[Profile.list.indexOf(this)];
+    }
+
+    constructor(name) {
         this.name = name;
     }
 }
@@ -62,7 +65,7 @@ var tabCounter = document.querySelector('.tabCounter');
 var tabUI = tabContainer.firstElementChild.outerHTML;
 var tabRenamer = document.querySelector('.characterName');
 
-Profile.list.push(new Profile(0, "Dungeon Master", tabUI));
+Profile.list.push(new Profile("Dungeon Master"));
 
 SelectActiveTab();
 
@@ -102,7 +105,7 @@ window.addEventListener("load", function () {
 function NewTab() {
     if (Profile.list.length >= 99) return;
 
-    Profile.list.push(new Profile(Profile.Count, "New Character (" + Profile.Count + ")"));
+    Profile.list.push(new Profile("New Character (" + Profile.Count + ")"));
     tabContainer.innerHTML += tabUI;
 
     UpdateFromData();
@@ -133,17 +136,19 @@ function UpdateGlobal() {
 }
 
 function UpdateFromData() {
-    for (const profile of Profile.list)
-        profile.Tab.firstElementChild.value = profile.name;
+    for (const tab of Profile.TabList) {
+        const index = Profile.TabList.indexOf(tab);
+        tab.firstElementChild.value = Profile.list[index].name;
+    }
 
     tabRenamer.value = Profile.ActiveElement.name;
 }
 
 function SelectActiveTab() {
+    if (Profile.activeIndex >= Profile.Count)
+        Profile.activeIndex = Profile.Count - 1;
     if (Profile.activeIndex < 0)
         Profile.activeIndex = 0;
-    else if (Profile.activeIndex >= Profile.Count)
-        Profile.activeIndex = Profile.Count - 1;
 
     UpdateFromData();
 
@@ -191,10 +196,7 @@ function DeleteTab(profile) {
         Profile.activeIndex--;
 
     Profile.list.splice(index, 1);
-    profile.Tab.remove();
-
-    for (const profile of Profile.list)
-        profile.index = Profile.list.indexOf(profile);
+    Profile.list[index].Tab.remove();
 
     SelectActiveTab();
     HidePopUp();
@@ -244,15 +246,13 @@ function HandleUpload(event) {
     var reader = new FileReader();
 
     reader.onload = function () {
-        var oldIndex = Profile.ActiveElement.index;
         try {
             Profile.ActiveElement = JSON.parse(reader.result);
         } catch {
             ShowPopUp('Upload Error', 'The file you uploaded was either not a compatible JSON file or was corrupted', 'Close', 'Okay');
         }
-        Profile.ActiveElement.index = oldIndex;
 
-        SelectActiveTab();
+        UpdateFromData();
     };
 
     if (file != null) reader.readAsText(file);

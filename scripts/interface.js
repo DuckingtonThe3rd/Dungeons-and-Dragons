@@ -195,8 +195,8 @@ function DeleteTab(profile) {
     if (index < Profile.activeIndex)
         Profile.activeIndex--;
 
-    Profile.list.splice(index, 1);
     Profile.list[index].Tab.remove();
+    Profile.list.splice(index, 1);
 
     SelectActiveTab();
     HidePopUp();

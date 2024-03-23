@@ -187,7 +187,7 @@
       </section>
       
     </div>
-    <button class="closeSettingsButton" type="submit" onclick="CloseSettings()" disabled>
+    <button class="largeActionButton" type="submit" onclick="CloseSettings()" disabled>
       <img src="icons/floppy.svg" alt="Save Icon" class="saveIcon">
       Save
     </button>
@@ -215,7 +215,7 @@
       </nav>
     </section>
     <section class="characterInfo">
-      <input autocomplete="off" autocorrect="off" spellcheck="false"  oninput="UpdateGlobal()" class="characterName clickable" type="text" aria-label="Player Name"  value="Dungeon Master" placeholder="Name Here">
+      <input autocomplete="off" autocorrect="off" spellcheck="false"  oninput="UpdateGlobal()" class="characterName clickable" type="text" aria-label="Player Name"  value="Dungeon Master" placeholder="Name Here" id="characterNameGlobal">
       <div class="characterActions">
         <button class="circleIconButton" type="button" aria-label="Download JSON" onclick="DownloadActiveProfile()">
           <img src="icons/download.svg" alt="Download Icon">
@@ -229,6 +229,22 @@
       </div>
     </section>
   </header>
+  <section class="workspace">
+    <section class="history">
+      <h1>History</h1>
+      <ul>
+
+      </ul>
+      
+    <button class="largeActionButton" type="button" onclick="NotImplemented()">
+      <img src="icons/x.svg" alt="Save Icon" class="saveIcon">
+      Clear
+    </button>
+    </section>
+    <section class="game">
+
+    </section>
+  </section>
   </main>
   <div class="gayBar">
     <div class="gayness"></div>

@@ -28,6 +28,14 @@ main {
     border-radius: 15px;
     width: calc(100vw);
     padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    overflow-y: scroll;
+}
+
+main::-webkit-scrollbar {
+    display: none;
 }
 
 .gayBar {
@@ -355,7 +363,7 @@ section.settingsPanel .settingsArea::-webkit-scrollbar {
     display: none;
 }
 
-section.settingsPanel .closeSettingsButton {
+.largeActionButton {
     background: lightgray;
     padding: 1em;
     box-shadow: none;
@@ -363,20 +371,22 @@ section.settingsPanel .closeSettingsButton {
     display: flex;
     justify-content: center;
     gap: 0.5em;
+    width: 100%;
     filter: invert(1);
 }
 
-section.settingsPanel .closeSettingsButton:hover,
-section.settingsPanel .closeSettingsButton:focus {
+.largeActionButton:hover,
+.largeActionButton:focus {
     transform: scale(1.05);
     box-shadow: none;
+    outline: 4px solid rgb(69, 69, 69);
 }
 
-section.settingsPanel .closeSettingsButton:active {
+.largeActionButton:active {
     transform: scale(0.95);
 }
 
-section.settingsPanel .closeSettingsButton img {
+.largeActionButton img {
     border-radius: 0;
 }
 
@@ -725,4 +735,39 @@ section.settingsPanel .sectionTitle:focus .arrow {
     87% {
         opacity: 1;
     }
+}
+
+.workspace {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 1em;
+    min-height: 30em;
+}
+
+.workspace > * {
+    background: lightgrey;
+    height: calc(100% - 4em);
+    width: 100%;
+    padding: 2em;
+    padding-top: 1.5em;
+}
+
+.workspace .history {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.workspace .history h1 {
+    font-family: 'Poppins Bold', sans-serif;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    font-size: 2em;
+}
+
+.workspace .history ul {
+    background: rgb(195, 195, 195);
+    height: 100%;
 }

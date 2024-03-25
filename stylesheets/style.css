@@ -34,7 +34,7 @@ main {
     overflow-y: scroll;
 }
 
-main::-webkit-scrollbar {
+*::-webkit-scrollbar {
     display: none;
 }
 
@@ -118,6 +118,7 @@ nav.profileSection {
 
 .tabs {
     display: flex;
+    justify-content: space-between;
     margin: 0px;
     padding: 0px;
     width: 100%;
@@ -133,6 +134,7 @@ nav.profileSection {
     background: gray;
     color: rgb(69, 69, 69);
     width: 100%;
+    min-width: 17.5%;
     padding: 5px 5px;
     padding-left: 20px;
     display: flex;
@@ -153,7 +155,7 @@ nav.profileSection {
 }
 
 .tab:hover {
-    transform: scale(1);
+    transform: scale(0.975);
     box-shadow: none;
     opacity: 1;
 }
@@ -199,7 +201,7 @@ nav.profileSection {
 }
 
 .newTab:active {
-    transform: scale(0.8);
+    transform: scale(0.8) rotate(90deg);
 }
 
 .newTab img {
@@ -761,13 +763,87 @@ section.settingsPanel .sectionTitle:focus .arrow {
 
 .workspace .history h1 {
     font-family: 'Poppins Bold', sans-serif;
-    width: 100%;
-    text-align: center;
     margin: 0;
-    font-size: 2em;
+    font-size: 1.75em;
 }
 
 .workspace .history ul {
     background: rgb(195, 195, 195);
     height: 100%;
+    padding: 0;
+    overflow-y: scroll;
+}
+
+.historySectionTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 0.5em;
+}
+
+.historySectionTitle img {
+    aspect-ratio: 1;
+    width: 1.25em;
+}
+
+.workspace .history ul li {
+    list-style-type: none;
+    margin: 0.5em;
+    background: darkgrey;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+    height: 6.25em;
+}
+
+.workspace .history ul li .rollValue {
+    font-family: 'Poppins Bold', sans-serif;
+    font-size: 1.5em;
+}
+
+.workspace .history ul li .rollInfo {
+    color: #434343;
+}
+
+.workspace .history ul li .rollDataContainer {
+    padding: 1em 2em;
+    transition: 0s;
+}
+
+.workspace .history ul li:hover {
+    transform: scale(1.05);
+    background: rgb(178, 178, 178);
+    box-shadow: none;
+}
+
+.workspace .history ul li:active {
+    transform: scale(0.9);
+}
+
+.workspace .history ul li button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background:#999999;
+    width: 20%;
+    height: 7.5em;
+}
+
+.workspace .history ul li button:hover, .workspace .history ul li button:hover, .workspace .history ul li button:focus {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    transform: scale(1);
+    width: 100%;
+    background:rgb(69, 69, 69);
+}
+
+.workspace .history ul li button:hover ~ .rollDataContainer, .workspace .history ul li button:active ~ .rollDataContainer, .workspace .history ul li button:focus ~ .rollDataContainer {
+    width: 0% !important;
+    opacity: 0;
+    font-size: 0em;
+}
+
+.workspace .history ul li button:hover img, .workspace .history ul li button:active img, .workspace .history ul li button:focus img {
+    filter: invert(1);
 }

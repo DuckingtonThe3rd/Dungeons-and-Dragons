@@ -235,7 +235,6 @@ function UploadActiveProfile() {
     HidePopUp();
 }
 
-// JSON parsing not working
 function HandleUpload(event) {
     const selectedFiles = event.target.files;
 
@@ -247,7 +246,7 @@ function HandleUpload(event) {
 
     reader.onload = function () {
         try {
-            Profile.ActiveElement = JSON.parse(reader.result);
+            Profile.ActiveElement.name = JSON.parse(reader.result).name;
         } catch {
             ShowPopUp('Upload Error', 'The file you uploaded was either not a compatible JSON file or was corrupted', 'Close', 'Okay');
         }

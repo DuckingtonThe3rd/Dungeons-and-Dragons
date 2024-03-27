@@ -235,19 +235,19 @@
         <img src="icons/bank.svg" alt="Archive Icon">
         <h1>History</h1>
       </div>
-      <ul>
+      <ul class="historyList">
         <li class="clickable">
-          <button class="deleteContainer" type="button" aria-label="Delete Item" onclick="NotImplemented()">
+          <button class="deleteContainer" type="button" aria-label="Delete Item" onclick="DeleteHistoryAt(this.parentElement)">
             <img src="icons/trash.svg" alt="Trash Icon">
           </button>
           <div class="rollDataContainer">
-            <div class="rollValue">7 of 11</div>
-            <div class="rollInfo">2d6 + CON(-1)</div>
+            <div class="rollValue"></div>
+            <div class="rollInfo"></div>
           </div>
         </li>
       </ul>
       
-    <button class="largeActionButton" type="button" onclick="NotImplemented()">
+    <button class="largeActionButton" type="button" onclick="DeleteHistory()">
       <img src="icons/x.svg" alt="Save Icon" class="saveIcon">
       Clear
     </button>

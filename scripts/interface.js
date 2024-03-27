@@ -33,6 +33,8 @@ class Profile {
     constructor(name) {
         this.name = name;
     }
+    
+    rollHistory = [];
 }
 
 const hoverableElements = document.querySelectorAll('input, button, .clickable, .tab, label');
@@ -162,6 +164,7 @@ function SelectActiveTab() {
 
 function SelectTab(tab) {
     Profile.activeIndex = Profile.TabList.indexOf(tab);
+    UpdateHistory();
     SelectActiveTab();
 }
 
@@ -246,7 +249,9 @@ function HandleUpload(event) {
 
     reader.onload = function () {
         try {
-            Profile.ActiveElement.name = JSON.parse(reader.result).name;
+            result = JSON.parse(reader.result);
+            Profile.ActiveElement.name = this.result.name;
+            Profile.ActiveElement.rollHistory = this.result.rollHistory;
         } catch {
             ShowPopUp('Upload Error', 'The file you uploaded was either not a compatible JSON file or was corrupted', 'Close', 'Okay');
         }
@@ -345,4 +350,44 @@ function EnableChildren(element) {
     element.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])').forEach(item => {
         item.disabled = false;
     });
+}
+
+var historyList = document.querySelector('.historyList');
+var historyListItem = historyList.firstElementChild;
+historyList.innerHTML = "";
+
+function Roll(max, formula) {
+    var roll = Math.ceil((1 - Math.random()) * max) + 1;
+    Profile.ActiveElement.rollHistory.unshift({"roll": roll, "max": max, "formula": formula});
+    UpdateHistory();
+    
+    return roll;
+}
+
+function UpdateHistory() {
+    historyList.innerHTML = "";
+    for (const entry of Profile.ActiveElement.rollHistory) {
+        historyList.innerHTML = historyList.innerHTML + historyListItem.outerHTML;
+        historyList.lastElementChild.children[1].children[0].innerHTML = entry.roll + " of " + entry.max;
+        historyList.lastElementChild.children[1].children[1].innerHTML = entry.formula;
+    }
+}
+
+function DeleteHistoryAt(element) {
+    ShowPopUp("Delete Roll?", "This will permanently delete this roll from this character! Are you sure?", "No", "Yes");
+    popUpPositive.onclick = function () {
+        var index = Array.from(historyList.children).indexOf(element);
+        Profile.ActiveElement.rollHistory.splice(index, 1);
+        UpdateHistory();
+        HidePopUp();
+    };
+}
+
+function DeleteHistory() {
+    ShowPopUp("Delete History?", "This will permanently delete all rolls for this character, and cannot be undone! Are you sure?", "No", "Yes");
+    popUpPositive.onclick = function () {
+        Profile.ActiveElement.rollHistory = [];
+        UpdateHistory();
+        HidePopUp();
+    };
 }

@@ -12,6 +12,7 @@
 </head>
 
 <body>
+  <!--
   <div class="loader">
     <div class="loaderMask"></div>
     <div class="anchor">
@@ -20,9 +21,9 @@
       <div class="circle"></div>
     </div>
     <h1></h1>
-  </div>
+  </div>-->
 
-  <div class="disablePage"></div>
+  <div class="disablePage" onclick="Escape()"></div>
 
   <div class="popUpContainer">
     <div class="popUp">
@@ -35,14 +36,15 @@
     </div>
   </div>
 
-  <section class="settingsPanel">
-    <div class="settingsTitleContainer">
-        <img src="icons/gear.svg" alt="Gear Icon">
-        <h1 class="settingsTitle">Settings</h1>
+  <section class="settingsPanel panel">
+    <div class="settingsTitleContainer panelTitleContainer">
+      <img src="icons/gear.svg" alt="Gear Icon">
+      <h1 class="settingsTitle panelTitle">Settings</h1>
     </div>
     <div class="settingsArea">
       <section class="settingsGroup">
-        <button class="sectionTitle" type="button" aria-label="Toggle Sidebar Section" onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
+        <button class="sectionTitle" type="button" aria-label="Toggle Sidebar Section"
+          onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
           <img src="icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
           <div class="title">
             <img src="icons/layout-sidebar-inset-reverse.svg" alt="Sidebar Icon">
@@ -79,7 +81,8 @@
       </section>
 
       <section class="settingsGroup">
-        <button class="sectionTitle" type="button" aria-label="Toggle Profiles Section" onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
+        <button class="sectionTitle" type="button" aria-label="Toggle Profiles Section"
+          onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
           <img src="icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
           <div class="title">
             <img src="icons/people.svg" alt="Profiles Icon">
@@ -92,7 +95,8 @@
       </section>
 
       <section class="settingsGroup">
-        <button class="sectionTitle" type="button" aria-label="Toggle Audio Section" onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
+        <button class="sectionTitle" type="button" aria-label="Toggle Audio Section"
+          onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
           <img src="icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
           <div class="title">
             <img src="icons/volume-up.svg" alt="Audio Icon">
@@ -100,7 +104,7 @@
           </div>
         </button>
         <div class="settingsGroupContent active">
-          
+
           <div class="settingOption">
             <label class="settingOptionLabel" for="sfx">
               <div class="labelText">SFX</div>
@@ -108,7 +112,7 @@
               <div class="switch"></div>
             </label>
           </div>
-          
+
           <div class="settingOption">
             <label class="settingOptionLabel" for="music">
               <div class="labelText">Music</div>
@@ -121,7 +125,8 @@
       </section>
 
       <section class="settingsGroup">
-        <button class="sectionTitle" type="button" aria-label="Toggle Appearence Section" onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
+        <button class="sectionTitle" type="button" aria-label="Toggle Appearence Section"
+          onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
           <img src="icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
           <div class="title">
             <img src="icons/palette.svg" alt="Palette Icon">
@@ -129,7 +134,7 @@
           </div>
         </button>
         <div class="settingsGroupContent active">
-          
+
           <div class="settingOption">
             <label class="settingOptionLabel" for="darkMode">
               <div class="labelText">Dark Mode</div>
@@ -164,9 +169,10 @@
 
         </div>
       </section>
-      
+
       <section class="settingsGroup">
-        <button class="sectionTitle" type="button" aria-label="Toggle Backups Section" onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
+        <button class="sectionTitle" type="button" aria-label="Toggle Backups Section"
+          onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
           <img src="icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
           <div class="title">
             <img src="icons/hdd.svg" alt="Backup Icon">
@@ -174,7 +180,7 @@
           </div>
         </button>
         <div class="settingsGroupContent active">
-          
+
           <div class="settingOption">
             <label class="settingOptionLabel" for="useCookies">
               <div class="labelText">Cookies</div>
@@ -182,10 +188,10 @@
               <div class="switch"></div>
             </label>
           </div>
-          
+
         </div>
       </section>
-      
+
     </div>
     <button class="largeActionButton" type="submit" onclick="CloseSettings()" disabled>
       <img src="icons/floppy.svg" alt="Save Icon" class="saveIcon">
@@ -193,73 +199,181 @@
     </button>
   </section>
 
-  <main>
-    <header>
-    <section class="navArea">
-      <button class="settingsButton circleIconButton" type="button" aria-label="Settings" onclick="OpenSettings()">
-        <img src="icons/gear.svg" alt="Gear Icon">
-      </button>
-      <nav class="profileSection">
-        <div class="tabCounter">1</div>
-        <div class="tabs">
-          <div class="tab clickable" onclick="SelectTab(this)" onauxclick="MiddleClickDeleteTab(event, this)">
-            <input tabindex="0" type="text" aria-label="Player Name" class="tabName clickable" value="Dungeon Master" placeholder="Name Here" autocomplete="off" autocorrect="off" spellcheck="false" oninput="UpdateLocal(this)">
-            <button class="closeTab circleIconButton" type="button" aria-label="Close Tab" onmousedown="RequestDeleteTab(this.parentElement)" onclick="RequestDeleteTab(this.parentElement)">
-              <img src="icons/x.svg" alt="Close Icon">
-            </button>
+  <section class="sheetPanel panel">
+    <div class="sheetTitleContainer panelTitleContainer">
+      <img src="icons/clipboard.svg" alt="Gear Icon">
+      <h1 class="sheetTitle panelTitle">Sheets</h1>
+    </div>
+    <div class="sheetTabs">
+      <input type="radio" id="characterTabRadio" name="sheetTab" checked>
+      <label class="sheetTab active clickable" for="characterTabRadio">
+        <img src="icons/person-gear.svg" alt="Person Gear Icon">
+        <div>Character</div>
+      </label>
+      <input type="radio" id="combatTabRadio" name="sheetTab">
+      <label class="sheetTab clickable" for="combatTabRadio">
+        <img src="icons/bullseye.svg" alt="Bullseye Icon">
+        <div>Combat</div>
+      </label>
+      <input type="radio" id="lookTabRadio" name="sheetTab">
+      <label class="sheetTab clickable" for="lookTabRadio">
+        <img src="icons/palette.svg" alt="Palette Icon">
+        <div>Look</div>
+      </label>
+      <input type="radio" id="spellsTabRadio" name="sheetTab">
+      <label class="sheetTab clickable" for="spellsTabRadio">
+        <img src="icons/magic.svg" alt="Wand Icon">
+        <div>Spells</div>
+      </label>
+    </div>
+    <div class="sheetContentArea">
+      <section class="sheetContent" id="characterSheet">
+        <div class="characterType">
+          <div class="nameInfo">
+            <input autocomplete="off" autocorrect="off" spellcheck="false"
+              oninput="Profile.ActiveElement.name = this.value; UpdateName()" class="sheetName clickable" type="text"
+              aria-label="Player Name" value="Dungeon Master" placeholder="Name Here" id="characterNameSheet">
+            <textarea type="text" id="backstoryField" placeholder="Backstory" aria-label="Backstory"
+              class="clickable"></textarea>
+          </div>
+          <div class="characterDetails">
+            <div class="infoFieldContainer">
+              <input type="text" class="infoField clickable inputElement" autocomplete="off" autocorrect="off"
+                spellcheck="false" placeholder="Class" aria-label="Class Name">
+              <input type="number" class="clickable inputElement" min="1" max="20" value="1" aria-label="Level"
+                id="levelField">
+            </div>
+            <div class="infoFieldContainer">
+              <input type="text" class="infoField clickable inputElement" id="backgroundField" autocomplete="off"
+                autocorrect="off" spellcheck="false" placeholder="Background" aria-label="Background">
+            </div>
+            <div class="infoFieldContainer">
+              <input type="text" class="infoField clickable inputElement" id="playerNameField" autocomplete="off"
+                autocorrect="off" spellcheck="false" placeholder="Player Name" aria-label="Player Name">
+            </div>
+            <div class="infoFieldContainer">
+              <div class="dropdownWrapper">
+                <input type="checkbox" id="raceField" class="dropdownState">
+                <div class="infoField clickable inputElement dropdownContainer">
+                  <label for="raceField" class="dropdownOpenLabel">
+                    <div class="dropdownLabel" data-dropdown-title="Select Race" data-dropdown-content="None"></div>
+                    <img class="dropdownArrow" src="icons/chevron-down.svg" alt="Down Arrow">
+                  </label>
+                  <div class="dropdownContent">
+                    <div class="dropdownSearchbar">
+                      <input type="text" class="searchbox" aria-label="Search Races" placeholder="Search">
+                      <button class="searchButton" type="submit" aria-label="Search">
+                        <img src="icons/search.svg" alt="Search Icon">
+                      </button>
+                    </div>
+                    <ul class="dropdownList">
+                      <li>
+                        <input type="radio" id="bardRace" name="race">
+                        <label class="dropdownListItemLabel" for="bardRace">
+                          <div class="dropdownListItemLabelText">Bard</div>
+                        </label>
+                      </li>
+                      <li>
+                        <input type="radio" id="dragonbornRace" name="race">
+                        <label class="dropdownListItemLabel" for="dragonbornRace">
+                          <div class="dropdownListItemLabelText">Dragonborn</div>
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="infoFieldContainer">
+              <input type="text" class="infoField clickable inputElement" id="alignmentField" autocomplete="off"
+                autocorrect="off" spellcheck="false" placeholder="Alignment" aria-label="Alignment">
+            </div>
+            <div class="infoFieldContainer">
+              <label for="xpField">XP</label>
+              <input type="number" class="infoField clickable inputElement" id="xpField" min="0" value="0">
+            </div>
           </div>
         </div>
-        <button class="newTab circleIconButton" type="button" aria-label="New Tab" onclick="NewTab()">
-          <img src="icons/plus.svg" alt="Plus Icon">
-        </button>
-      </nav>
-    </section>
-    <section class="characterInfo">
-      <input autocomplete="off" autocorrect="off" spellcheck="false"  oninput="UpdateGlobal()" class="characterName clickable" type="text" aria-label="Player Name"  value="Dungeon Master" placeholder="Name Here" id="characterNameGlobal">
-      <div class="characterActions">
-        <button class="circleIconButton" type="button" aria-label="Download JSON" onclick="DownloadActiveProfile()">
-          <img src="icons/download.svg" alt="Download Icon">
-        </button>
-        <button class="circleIconButton" type="button" aria-label="Upload JSON" onclick="RequestUploadActiveProfile()">
-          <img src="icons/upload.svg" alt="Upload Icon">
-        </button>
-        <button class="circleIconButton" type="button" aria-label="Open Sheet" onclick="NotImplemented()">
-          <img src="icons/open.svg" alt="Open Icon">
-        </button>
-      </div>
-    </section>
-  </header>
-  <section class="workspace">
-    <section class="history">
-      <div class="historySectionTitle">
-        <img src="icons/bank.svg" alt="Archive Icon">
-        <h1>History</h1>
-      </div>
-      <ul class="historyList">
-        <li class="clickable">
-          <button class="deleteContainer" type="button" aria-label="Delete Item" onclick="DeleteHistoryAt(this.parentElement)">
-            <img src="icons/trash.svg" alt="Trash Icon">
-          </button>
-          <div class="rollDataContainer">
-            <div class="rollValue"></div>
-            <div class="rollInfo"></div>
-          </div>
-        </li>
-      </ul>
-      
-    <button class="largeActionButton" type="button" onclick="DeleteHistory()">
-      <img src="icons/x.svg" alt="Save Icon" class="saveIcon">
-      Clear
-    </button>
-    </section>
-    <section class="game">
-
-    </section>
+      </section>
+    </div>
   </section>
+
+  <main>
+    <header>
+      <section class="navArea">
+        <button class="settingsButton circleIconButton" type="button" aria-label="Settings" onclick="OpenSettings()">
+          <img src="icons/gear.svg" alt="Gear Icon">
+        </button>
+        <nav class="profileSection">
+          <div class="tabCounter">1</div>
+          <div class="tabs">
+            <div class="tab clickable" onclick="SelectTab(this)">
+              <input tabindex="0" type="text" aria-label="Player Name" class="tabName clickable" value="Dungeon Master"
+                placeholder="Name Here" autocomplete="off" autocorrect="off" spellcheck="false"
+                oninput="Profile.ActiveElement.name = this.value; UpdateName()">
+              <button class="closeTab circleIconButton" type="button" aria-label="Close Tab"
+                onmousedown="RequestDeleteTab(this.parentElement)" onclick="RequestDeleteTab(this.parentElement)">
+                <img src="icons/x.svg" alt="Close Icon">
+              </button>
+            </div>
+          </div>
+          <button class="newTab circleIconButton" type="button" aria-label="New Tab" onclick="NewTab()">
+            <img src="icons/plus.svg" alt="Plus Icon">
+          </button>
+        </nav>
+      </section>
+      <section class="characterInfo">
+        <input autocomplete="off" autocorrect="off" spellcheck="false"
+          oninput="Profile.ActiveElement.name = this.value; UpdateName()" class="characterName clickable" type="text"
+          aria-label="Player Name" value="Dungeon Master" placeholder="Name Here" id="characterNameGlobal">
+        <div class="characterActions">
+          <button class="circleIconButton" type="button" aria-label="Download JSON" onclick="DownloadActiveProfile()">
+            <img src="icons/download.svg" alt="Download Icon">
+          </button>
+          <button class="circleIconButton" type="button" aria-label="Upload JSON"
+            onclick="RequestUploadActiveProfile()">
+            <img src="icons/upload.svg" alt="Upload Icon">
+          </button>
+          <button class="circleIconButton" type="button" aria-label="Open Sheet" onclick="OpenSheet()">
+            <img src="icons/open.svg" alt="Open Icon">
+          </button>
+        </div>
+      </section>
+    </header>
+    <section class="workspace">
+      <section class="history">
+        <div class="historySectionTitle">
+          <img src="icons/bank.svg" alt="Archive Icon">
+          <h1>History</h1>
+        </div>
+        <ul class="historyList">
+          <li class="clickable">
+            <button class="deleteContainer" type="button" aria-label="Delete Item"
+              onclick="DeleteHistoryAt(this.parentElement)">
+              <img src="icons/trash.svg" alt="Trash Icon">
+            </button>
+            <div class="rollDataContainer">
+              <div class="rollValue"></div>
+              <div class="rollInfo"></div>
+            </div>
+          </li>
+        </ul>
+
+        <button class="largeActionButton" type="button" onclick="DeleteHistory()">
+          <img src="icons/x.svg" alt="Save Icon">
+          Clear
+        </button>
+        <button class="largeActionButton" type="button" onclick="Roll(21, 'd20 + CHA(+1)')" style="margin-top: 1em;">
+          <img src="icons/bug.svg" alt="Debug Icon">
+          Test
+        </button>
+      </section>
+      <section class="game">
+
+      </section>
+    </section>
   </main>
-  <div class="gayBar">
-    <div class="gayness"></div>
-  </div>
 </body>
 <script src="scripts/interface.js"></script>
+
 </html>

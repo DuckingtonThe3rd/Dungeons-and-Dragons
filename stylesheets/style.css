@@ -38,22 +38,6 @@ main {
     display: none;
 }
 
-.gayBar {
-    margin-left: 8px;
-    border-radius: 75px;
-    background: lightgrey;
-    width: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-}
-
-.gayness {
-    background: grey;
-    height: 50%;
-    border-radius: 75px;
-}
-
 .navArea {
     height: 3em;
     background: #2c2c2c;
@@ -114,9 +98,11 @@ nav.profileSection {
     padding: 7px 7px;
     border-radius: 75px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.tabs {
+nav.profileSection .tabs {
     display: flex;
     justify-content: space-between;
     margin: 0px;
@@ -126,11 +112,11 @@ nav.profileSection {
     max-width: calc(98.98vw - 265px);
 }
 
-.tabs::-webkit-scrollbar {
+nav.profileSection .tabs::-webkit-scrollbar {
     display: none;
 }
 
-.tab {
+nav.profileSection .tab {
     background: gray;
     color: rgb(69, 69, 69);
     width: 100%;
@@ -145,35 +131,35 @@ nav.profileSection {
     box-sizing: unset;
 }
 
-.tab.active {
+nav.profileSection .tab.active {
     background: lightgray;
     border-bottom: 4px solid rgba(0, 0, 0, 0.45);
 }
 
-.tab.active input {
+nav.profileSection .tab.active input {
     font-family: 'Poppins Bold', sans-serif;
 }
 
-.tab:hover {
+nav.profileSection .tab:hover {
     transform: scale(0.975);
     box-shadow: none;
     opacity: 1;
 }
 
-.tab:active {
+nav.profileSection .tab:active {
     transform: scale(0.95);
 }
 
-.tabName {
+nav.profileSection .tabName {
     border: none;
     padding: 0px 10px;
     background: transparent;
     min-width: 0px;
 }
 
-.tabName:hover,
-.tabName:active,
-.tabName:focus {
+nav.profileSection .tabName:hover,
+nav.profileSection .tabName:active,
+nav.profileSection .tabName:focus {
     transform: scale(1);
     outline: none;
     box-shadow: none;
@@ -256,6 +242,7 @@ nav.profileSection {
 
 .characterName:hover {
     transform: scale(1.025);
+    background: rgb(210, 210, 210);
     box-shadow: none;
 }
 
@@ -320,14 +307,13 @@ nav.profileSection {
     color: white;
 }
 
-section.settingsPanel {
+section.panel {
     background: rgb(240, 240, 240);
 
     position: absolute;
     padding: 2em;
     height: calc(100% - 5em);
     z-index: 4;
-    transform: translateX(-110%);
 
     min-width: 20em;
     width: 30vw;
@@ -337,7 +323,17 @@ section.settingsPanel {
     gap: 1.5em;
 }
 
-section.settingsPanel .settingsTitleContainer {
+section.settingsPanel {
+    transform: translateX(-110%);
+}
+
+section.sheetPanel {
+    transform: translateX(100vw);
+    width: 70vw;
+}
+
+
+section.panel .panelTitleContainer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -346,11 +342,10 @@ section.settingsPanel .settingsTitleContainer {
     padding: 0;
 }
 
-section.settingsPanel .settingsTitle {
+section.panel .panelTitle {
     font-family: 'Poppins Bold', sans-serif;
     font-size: 2em;
     margin: 0;
-    width: 5em;
     text-align: left;
 }
 
@@ -854,4 +849,367 @@ section.settingsPanel .sectionTitle:focus .arrow {
 .workspace .history ul li button:hover img, .workspace .history ul li button:active img, .workspace .history ul li button:focus img {
     filter: invert(1);
     transform: scale(1.5);
+}
+
+.sheetPanel .sheetTabs {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    overflow-x: scroll;
+    padding: 1em;
+    min-height: 4em;
+}
+
+.sheetPanel .sheetTabs .sheetTab {
+    width: 100%;
+    background: rgb(230, 230, 230);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    gap: 0.5em;
+}
+
+.sheetPanel .sheetTabs .sheetTab div {
+    font-family: inherit;
+}
+
+.sheetPanel .sheetTabs input {
+    position: absolute;
+    opacity: 0;
+}
+
+.sheetPanel .sheetTabs input:checked + .sheetTab {
+    background: #2c2c2c;
+    color: white;
+    font-family: 'Poppins Bold', sans-serif;
+}
+
+.sheetPanel .sheetTabs input:checked + .sheetTab img {
+    filter: invert(1);
+}
+
+.sheetPanel .sheetTabs .sheetTab:hover, .sheetPanel .sheetTabs input:focus + .sheetTab {
+    transform: scale(1.1);
+    box-shadow: none;
+}
+
+.sheetPanel .sheetTabs .sheetTab:active {
+    transform: scale(0.9);
+}
+
+.sheetPanel .sheetContentArea {
+    background: rgb(230, 230, 230);
+    height: 100%;
+    padding: 1em;
+    overflow-y: scroll;
+}
+
+.sheetContent {
+    display: flex;
+    flex-direction: column;
+}
+
+#characterSheet .characterType {
+    background: lightgray;
+    padding: 1em;
+    display: flex;
+    gap: 1em;
+}
+
+#characterSheet .characterType .nameInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+#characterSheet .characterType .nameInfo #backstoryField {
+    background: rgb(240, 240, 240);
+    padding: 1em;
+    border: none;
+    height: 100%;
+    resize: vertical;
+    cursor: text;
+    min-height: 94.525px;
+    max-height: 356px;
+}
+
+#characterSheet .characterType .nameInfo #backstoryField:hover {
+    transform: scale(1);
+    background: white;
+    box-shadow: none;
+}
+
+#characterSheet .characterType .nameInfo #backstoryField:active, #characterSheet .characterType .nameInfo #backstoryField:focus {
+    transform: scale(1);
+    border-bottom: 5px solid darkgray;
+    outline: none;
+}
+
+#characterSheet .characterType .sheetName {
+    padding: 0.75em 1.25em;
+    font-family: 'Poppins Bold', sans-serif;
+    font-size: 1.15em;
+    background: rgb(240, 240, 240);
+    cursor: text;
+}
+
+#characterSheet .characterType .sheetName:hover {
+    transform: scale(1.1);
+    box-shadow: none;
+}
+
+#characterSheet .characterType .sheetName:active {
+    transform: scale(0.9);
+}
+
+#characterSheet .characterType .characterDetails {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    row-gap: 1em;
+    column-gap: 1em;
+    max-height: 191.975px;
+}
+
+#characterSheet .characterType .characterDetails .infoFieldContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5em;
+    background: rgb(230, 230, 230);
+    position: relative;
+}
+
+#characterSheet .characterType .characterDetails .infoFieldContainer .inputElement {
+    padding: 1.25em;
+    width: 100%;
+    background: rgb(230, 230, 230);
+    color: #2c2c2c;
+    cursor: text;
+}
+
+#characterSheet .characterType .characterDetails .infoFieldContainer .inputElement:hover, #characterSheet .characterType .characterDetails .infoFieldContainer .inputElement:focus {
+    transform: scale(1.05);
+    background: rgb(250, 250, 250) ;
+    box-shadow: none;
+    outline: none;
+}
+
+#characterSheet .characterType .characterDetails .infoFieldContainer  .inputElement:active {
+    transform: scale(0.95);
+}
+
+#characterSheet .characterType .characterDetails .infoFieldContainer input[type="number"] {
+    width: 20%;
+}
+
+#characterSheet .characterType .characterDetails .infoFieldContainer label {
+    padding-left: 1em;
+    color: #757575;
+    font-size: 0.85em;
+    width: 100%;
+}
+
+.dropdownWrapper {
+    position: absolute;
+    width: calc(100% + 0.5em);
+    align-self: flex-start;
+    color: #fff;
+}
+
+.dropdownContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    position: relative;
+    width: calc(100% - 2.5em) !important;
+    z-index: 1;
+    cursor: auto !important;
+    padding: 1em !important;
+}
+
+.dropdownContainer .dropdownOpenLabel {
+    padding: 0 !important;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer !important;
+}
+
+.dropdownState {
+    position: absolute;
+    opacity: 0;
+}
+
+.dropdownState:checked + .dropdownContainer {
+    background: white !important;
+    transform: scale(1.025) !important;
+}
+
+.dropdownState:checked + .dropdownContainer:hover {
+    transform: scale(1.05) !important;
+}
+
+#characterSheet .characterType .characterDetails .infoFieldContainer .dropdownState:focus + .dropdownContainer {
+    transform: scale(1.025);
+    background: rgb(250, 250, 250) ;
+    box-shadow: none;
+    outline: none;
+    transform: scale(1.05);
+}
+
+.dropdownState:checked + .dropdownContainer .dropdownArrow {
+    transform: rotate(-180deg);
+}
+
+.dropdownContent {
+    opacity: 0;
+    padding: 0px;
+    height: 0px !important;
+    transform: scale(1.3);
+}
+
+.dropdownState:checked + .dropdownContainer .dropdownContent {
+    transform: scale(1);
+    opacity: 1;
+    padding: 1em;
+    height: auto !important;
+    background: rgb(250, 250, 250);
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    z-index: auto;
+}
+
+.dropdownState:checked + .dropdownContainer .dropdownLabel:after {
+    content: attr(data-dropdown-title);
+}
+
+.dropdownContent .dropdownContentHeading {
+    font-family: 'Poppins Bold', sans-serif;
+}
+
+.dropdownContainer .dropdownLabel::after {
+    content: attr(data-dropdown-content);
+}
+
+.dropdownContent .dropdownSearchbar {
+    background: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdownContent .dropdownSearchbar .searchbox {
+    border: none;
+    padding: 0.5em 1em;
+    width: 70%;
+    background: transparent;
+    color: #666666;
+}
+
+.dropdownContent .dropdownSearchbar .searchButton {
+    background: transparent;
+    box-shadow: none;
+    border-radius: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75em;
+    margin: 0.25em;
+}
+
+.dropdownContent .dropdownSearchbar .searchbox:focus + .searchButton img {
+    filter: invert(1);
+}
+
+.dropdownContent .dropdownSearchbar:hover {
+    transform: scale(1.05);
+}
+
+.dropdownContent .dropdownSearchbar .searchbox:active {
+    transform: scale(0.85);
+}
+
+.dropdownContent .dropdownSearchbar:focus-within {
+    background: rgb(69, 69, 69);
+}
+
+.dropdownContent .dropdownSearchbar:focus-within .searchbox {
+    color: white;
+}
+
+.dropdownContent .dropdownSearchbar .searchbox:focus {
+    outline: none;
+}
+
+.dropdownContent .dropdownSearchbar .searchButton:focus, .dropdownContent .dropdownSearchbar .searchButton:hover {
+    outline: none;
+    transform: scale(1.3);
+    background: #2c2c2c;
+}
+
+.dropdownContent .dropdownSearchbar .searchButton:focus img, .dropdownContent .dropdownSearchbar .searchButton:hover img {
+    filter: invert(1);
+}
+
+.dropdownContent .dropdownSearchbar .searchButton:active {
+    transform: scale(0.85);
+}
+
+.dropdownContent .dropdownList {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    max-height: 12em;
+    overflow-y: scroll;
+}
+
+.dropdownContent .dropdownList li {
+    list-style-type: none;
+    margin: 0;
+    position: relative;
+    padding-left: 0em;
+}
+
+.dropdownContent .dropdownList li input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.dropdownContent .dropdownList li input[type="radio"]:checked + .dropdownListItemLabel {
+    background: #2c2c2c !important;
+}
+
+.dropdownContent .dropdownList li input[type="radio"]:checked + .dropdownListItemLabel .dropdownListItemLabelText {
+    color: white;
+}
+
+.dropdownContent .dropdownList li input[type="radio"]:checked + .dropdownListItemLabel img {
+    filter: invert(1);
+}
+
+.dropdownContent .dropdownList li .dropdownListItemLabel {
+    background: rgb(240, 240, 240);
+    font-size: 0.85em;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    width: auto !important;
+    cursor: pointer;
+    transform: scale(0.95);
+}
+
+.dropdownContent .dropdownList li .dropdownListItemLabel:hover, .dropdownContent .dropdownList li input[type="radio"]:focus + .dropdownListItemLabel {
+    background: rgb(245, 245, 245);
+    transform: scale(1);
+}
+
+.dropdownContent .dropdownList li .dropdownListItemLabel:active {
+    transform: scale(0.9);
 }

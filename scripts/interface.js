@@ -66,6 +66,7 @@ var tabContainer = document.querySelector('.tabs');
 var tabCounter = document.querySelector('.tabCounter');
 var tabUI = tabContainer.firstElementChild.outerHTML;
 var tabRenamer = document.querySelector('.characterName');
+var sheetRenamer = document.querySelector('.sheetName');
 
 Profile.list.push(new Profile("Dungeon Master"));
 
@@ -86,22 +87,28 @@ document.addEventListener("keydown", function (event) {
 });
 
 document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape")
-        HidePopUp();
+    if (event.key === "Escape") Escape();
 });
+
+function Escape() {
+    HidePopUp();
+    CloseSettings();
+    CloseSheet();
+}
 
 
 let loader = document.querySelector('.loader');
 let loaderMask = document.querySelector('.loaderMask');
-window.addEventListener("load", function () {
+window.addEventListener("load", function () {/*
     setTimeout(function () {
         loaderMask.style.height = '100vh';
     }, 2000);
     setTimeout(function () {
         loader.style.opacity = '0';
         loader.style.zIndex = '-6';
-    }, 3000);
+    }, 3000);*/
     DisableChildren(settingsMenu);
+    DisableChildren(sheetMenu);
 });
 
 function NewTab() {
@@ -110,40 +117,21 @@ function NewTab() {
     Profile.list.push(new Profile("New Character (" + Profile.Count + ")"));
     tabContainer.innerHTML += tabUI;
 
-    UpdateFromData();
+    UpdateName();
     SelectActiveTab();
 
     Profile.TabList[(Profile.Count - 1)].firstElementChild.focus();
     SelectTab(Profile.TabList[Profile.Count - 1])
 }
 
-function UpdateLocal(field) {
-    var profile = Profile.list[Profile.TabList.indexOf(field.parentElement)];
-
-    if (field.value.replace(" ", "") == '')
-        field.value = '';
-
-    profile.name = field.value;
-
-    UpdateFromData();
-}
-
-function UpdateGlobal() {
-    if (tabRenamer.value.replace(" ", "") == '')
-        tabRenamer.value = '';
-
-    Profile.ActiveElement.name = tabRenamer.value;
-
-    UpdateFromData();
-}
-
-function UpdateFromData() {
+function UpdateName() {
     for (const tab of Profile.TabList) {
         const index = Profile.TabList.indexOf(tab);
         tab.firstElementChild.value = Profile.list[index].name;
     }
 
     tabRenamer.value = Profile.ActiveElement.name;
+    sheetRenamer.value = Profile.ActiveElement.name;
 }
 
 function SelectActiveTab() {
@@ -152,7 +140,7 @@ function SelectActiveTab() {
     if (Profile.activeIndex < 0)
         Profile.activeIndex = 0;
 
-    UpdateFromData();
+    UpdateName();
 
     Profile.list.forEach(profile => {
         profile.Tab.classList.remove('active');
@@ -249,14 +237,15 @@ function HandleUpload(event) {
 
     reader.onload = function () {
         try {
-            result = JSON.parse(reader.result);
-            Profile.ActiveElement.name = this.result.name;
-            Profile.ActiveElement.rollHistory = this.result.rollHistory;
+            parseResult = JSON.parse(reader.result);
+            Profile.ActiveElement.name = parseResult.name;
+            Profile.ActiveElement.rollHistory = parseResult.rollHistory;
+            UpdateHistory();
         } catch {
             ShowPopUp('Upload Error', 'The file you uploaded was either not a compatible JSON file or was corrupted', 'Close', 'Okay');
         }
 
-        UpdateFromData();
+        UpdateName();
     };
 
     if (file != null) reader.readAsText(file);
@@ -317,6 +306,21 @@ function CloseSettings() {
     DisableChildren(settingsMenu);
 }
 
+var sheetMenu = document.querySelector('.sheetPanel');
+function OpenSheet() {
+    sheetMenu.style.transform = 'translateX(calc(100vw - 100% - 1em))';
+
+    DisableChildren(main);
+    EnableChildren(sheetMenu);
+}
+
+function CloseSheet() {
+    sheetMenu.style.transform = 'translateX(100vw)';
+
+    EnableChildren(main);
+    DisableChildren(sheetMenu);
+}
+
 function ToggleSettingGroup(group, arrow) {
     if (group.classList.contains('active')) {
         DisableChildren(group);
@@ -359,6 +363,7 @@ historyList.innerHTML = "";
 function Roll(max, formula) {
     var roll = Math.ceil((1 - Math.random()) * max) + 1;
     Profile.ActiveElement.rollHistory.unshift({"roll": roll, "max": max, "formula": formula});
+    if (Profile.ActiveElement.rollHistory.length > 50) Profile.ActiveElement.rollHistory.pop();
     UpdateHistory();
     
     return roll;
@@ -374,7 +379,7 @@ function UpdateHistory() {
 }
 
 function DeleteHistoryAt(element) {
-    ShowPopUp("Delete Roll?", "This will permanently delete this roll from this character! Are you sure?", "No", "Yes");
+    ShowPopUp("Delete Roll?", "This will permanently delete this roll from this character! Are you sure?", "Cancel", "Delete");
     popUpPositive.onclick = function () {
         var index = Array.from(historyList.children).indexOf(element);
         Profile.ActiveElement.rollHistory.splice(index, 1);
@@ -384,7 +389,8 @@ function DeleteHistoryAt(element) {
 }
 
 function DeleteHistory() {
-    ShowPopUp("Delete History?", "This will permanently delete all rolls for this character, and cannot be undone! Are you sure?", "No", "Yes");
+    if (Profile.ActiveElement.rollHistory.length <= 0) return;
+    ShowPopUp("Delete History?", "This will permanently delete all rolls for this character, and cannot be undone! Are you sure?", "Cancel", "Delete All");
     popUpPositive.onclick = function () {
         Profile.ActiveElement.rollHistory = [];
         UpdateHistory();

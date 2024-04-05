@@ -24,7 +24,7 @@ img {
 }
 
 main {
-    background: rgb(230, 230, 230);
+    background: rgb(240, 240, 240);
     border-radius: 15px;
     width: calc(100vw);
     padding: 1em;
@@ -90,6 +90,17 @@ button.newTab:focus {
     outline: 4px solid rgba(255, 255, 255, 0.3);
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
 nav.profileSection {
     background: #434343;
     height: calc(100% - 14px);
@@ -117,7 +128,7 @@ nav.profileSection .tabs::-webkit-scrollbar {
 }
 
 nav.profileSection .tab {
-    background: gray;
+    background: grey;
     color: rgb(69, 69, 69);
     width: 100%;
     min-width: 17.5%;
@@ -132,7 +143,7 @@ nav.profileSection .tab {
 }
 
 nav.profileSection .tab.active {
-    background: lightgray;
+    background: lightgrey;
     border-bottom: 4px solid rgba(0, 0, 0, 0.45);
 }
 
@@ -171,7 +182,7 @@ nav.profileSection .tabName:focus {
     padding-left: 10px;
     padding-right: 10px;
     font-family: 'Poppins Bold', sans-serif;
-    background: lightgray;
+    background: lightgrey;
     text-align: center;
     min-width: 35px;
     max-width: 35px;
@@ -221,7 +232,7 @@ nav.profileSection .tabName:focus {
 }
 
 .characterInfo {
-    background-color: gray;
+    background-color: grey;
     padding: 1em;
     padding-right: 2em;
     display: flex;
@@ -354,7 +365,7 @@ section.settingsPanel .settingsArea {
     background: rgb(230, 230, 230);
     height: 100%;
     overflow-y: scroll;
-    padding: 1em 2em;
+    padding: 1em 1.5em;
 }
 
 section.settingsPanel .settingsArea::-webkit-scrollbar {
@@ -362,7 +373,7 @@ section.settingsPanel .settingsArea::-webkit-scrollbar {
 }
 
 .largeActionButton {
-    background: lightgray;
+    background: lightgrey;
     padding: 1em;
     box-shadow: none;
     font-family: 'Poppins Bold', sans-serif;
@@ -436,7 +447,7 @@ section.settingsPanel .sectionTitle img {
 }
 
 section.settingsPanel .settingsGroupContent {
-    background: lightgray;
+    background: rgb(220, 220, 220);
     opacity: 0;
 
     height: 0;
@@ -744,7 +755,7 @@ section.settingsPanel .sectionTitle:focus .arrow {
 }
 
 .workspace > * {
-    background: lightgrey;
+    background: rgb(230, 230, 230);
     height: calc(100% - 4em);
     width: 100%;
     padding: 2em;
@@ -764,7 +775,7 @@ section.settingsPanel .sectionTitle:focus .arrow {
 }
 
 .workspace .history ul {
-    background: rgb(195, 195, 195);
+    background: rgb(220, 220, 220);
     height: 100%;
     padding: 0;
     overflow-y: scroll;
@@ -789,7 +800,7 @@ section.settingsPanel .sectionTitle:focus .arrow {
 .workspace .history ul li {
     list-style-type: none;
     margin: 0.5em;
-    background: darkgrey;
+    background: rgb(200, 200, 200);
     display: flex;
     justify-content: left;
     align-items: stretch;
@@ -818,7 +829,7 @@ section.settingsPanel .sectionTitle:focus .arrow {
 
 .workspace .history ul li:hover {
     transform: scale(1.05);
-    background: rgb(178, 178, 178);
+    background: rgb(210, 210, 210);
     box-shadow: none;
 }
 
@@ -829,7 +840,7 @@ section.settingsPanel .sectionTitle:focus .arrow {
 .workspace .history ul li button {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    background:#999999;
+    background:rgb(190, 190, 190);
     width: 3em;
     position: absolute;
     top: 0;
@@ -904,15 +915,29 @@ section.settingsPanel .sectionTitle:focus .arrow {
     height: 100%;
     padding: 1em;
     overflow-y: scroll;
+    margin-top: -1em;
+    display: flex;
 }
 
 .sheetContent {
     display: flex;
     flex-direction: column;
+    opacity: 0;
+    transform: scale(0.85);
+    position: absolute;
+}
+
+.sheetContent.active {
+    width: auto;
+    opacity: 1;
+    transform: scale(1);
+    width: 100%;
+    flex-shrink: 0;
+    position: relative;
 }
 
 #characterSheet .characterType {
-    background: lightgray;
+    background: rgb(220, 220, 220);
     padding: 1em;
     display: flex;
     gap: 1em;
@@ -943,7 +968,7 @@ section.settingsPanel .sectionTitle:focus .arrow {
 
 #characterSheet .characterType .nameInfo #backstoryField:active, #characterSheet .characterType .nameInfo #backstoryField:focus {
     transform: scale(1);
-    border-bottom: 5px solid darkgray;
+    border-bottom: 5px solid darkgrey;
     outline: none;
 }
 
@@ -1008,12 +1033,13 @@ section.settingsPanel .sectionTitle:focus .arrow {
 }
 
 #characterSheet .characterType .characterDetails .infoFieldContainer input[type="number"] {
-    max-width: 10%;
+    max-width: 25%;
     width: fit-content;
     margin-left: auto;
-    text-align: right;
+    text-align: center;
     background: rgb(240, 240, 240);
     font-family: 'Poppins Bold', sans-serif;
+    padding: 1.25em 0.5em;
 }
 
 #characterSheet .characterType .characterDetails .infoFieldContainer label {
@@ -1054,6 +1080,7 @@ section.settingsPanel .sectionTitle:focus .arrow {
     display: flex;
     justify-content: space-between;
     cursor: pointer !important;
+    font-size: 0.85em;
 }
 
 #characterSheet .characterType .characterDetails .infoFieldContainer .dropdownContainer:focus-within {
@@ -1063,7 +1090,7 @@ section.settingsPanel .sectionTitle:focus .arrow {
     outline: none;
     transform: scale(1.05);
     z-index: 10;
-    min-width: 267.438px;
+    min-width: 242.438px;
 }
 
 .dropdownContainer:focus-within .dropdownArrow {
@@ -1133,7 +1160,7 @@ section.settingsPanel .sectionTitle:focus .arrow {
     border-radius: 75px;
 }
 
-.dropdownContent .dropdownSearchbar .searchButton {
+.dropdownContent .dropdownSearchbar .resetButton {
     box-shadow: none;
     border-radius: 100%;
     aspect-ratio: 1 / 1;
@@ -1146,9 +1173,31 @@ section.settingsPanel .sectionTitle:focus .arrow {
     background: #2c2c2c;
 }
 
-.dropdownContent .dropdownSearchbar .searchButton img {
+.dropdownContent .dropdownSearchbar .resetButton:hover, .dropdownContent .dropdownSearchbar .resetButton:focus {
+    transform: scale(1.5) rotate(180deg);
+    outline-width: 4px;
+    background: #434343;
+}
+
+.dropdownContent .dropdownSearchbar .resetButton:hover {
+    transform: scale(1.6) rotate(180deg);
+}
+
+.dropdownContent .dropdownSearchbar .resetButton:active {
+    transform: scale(1.2) rotate(180deg);
+}
+
+.dropdownContent .dropdownSearchbar .resetButton img {
     filter: invert(1);
     transform: scale(0.85);
+}
+
+.dropdownContent .largeActionButton {
+    padding: 0px;
+}
+
+.dropdownContainer:focus-within .dropdownContent .largeActionButton {
+    padding: 1em;
 }
 
 .dropdownContent .dropdownSearchbar:hover {

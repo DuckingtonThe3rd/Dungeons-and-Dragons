@@ -35,6 +35,15 @@ class Profile {
     }
     
     rollHistory = [];
+
+    backstory = "";
+    class = "";
+    classLevel = 1;
+    background = "";
+    playerName = "";
+    race = "";
+    alignment = "";
+    xp = 0;
 }
 
 const hoverableElements = document.querySelectorAll('input, button, .clickable, .tab, label');
@@ -69,8 +78,6 @@ var tabRenamer = document.querySelector('.characterName');
 var sheetRenamer = document.querySelector('.sheetName');
 
 Profile.list.push(new Profile("Dungeon Master"));
-
-SelectActiveTab();
 
 document.addEventListener("keydown", function (event) {
     if (event.shiftKey && (event.key === "T" || event.shiftKey && event.key === "t")) {
@@ -107,6 +114,7 @@ window.addEventListener("load", function () {/*
         loader.style.opacity = '0';
         loader.style.zIndex = '-6';
     }, 3000);*/
+    SelectActiveTab();
     DisableChildren(settingsMenu);
     DisableChildren(sheetMenu);
 });
@@ -117,14 +125,19 @@ function NewTab() {
     Profile.list.push(new Profile("New Character (" + Profile.Count + ")"));
     tabContainer.innerHTML += tabUI;
 
-    UpdateName();
+    UpdateSheets();
     SelectActiveTab();
 
     Profile.TabList[(Profile.Count - 1)].firstElementChild.focus();
     SelectTab(Profile.TabList[Profile.Count - 1])
 }
 
-function UpdateName() {
+let backstoryField = document.getElementById("backstoryField");
+let classLevelField = document.getElementById("levelField");
+let playerNameField = document.getElementById("playerNameField");
+let backgroundField = document.getElementById("backgroundField");
+let xpField = document.getElementById("xpField");
+function UpdateSheets() {
     for (const tab of Profile.TabList) {
         const index = Profile.TabList.indexOf(tab);
         tab.firstElementChild.value = Profile.list[index].name;
@@ -132,6 +145,12 @@ function UpdateName() {
 
     tabRenamer.value = Profile.ActiveElement.name;
     sheetRenamer.value = Profile.ActiveElement.name;
+
+    backstoryField.value = Profile.ActiveElement.backstory;
+    classLevelField.value = Profile.ActiveElement.classLevel;
+    playerNameField.value = Profile.ActiveElement.playerName;
+    backgroundField.value = Profile.ActiveElement.background;
+    xpField.value = Profile.ActiveElement.xp;
 }
 
 function SelectActiveTab() {
@@ -140,7 +159,7 @@ function SelectActiveTab() {
     if (Profile.activeIndex < 0)
         Profile.activeIndex = 0;
 
-    UpdateName();
+    UpdateSheets();
 
     Profile.list.forEach(profile => {
         profile.Tab.classList.remove('active');
@@ -240,12 +259,20 @@ function HandleUpload(event) {
             parseResult = JSON.parse(reader.result);
             Profile.ActiveElement.name = parseResult.name;
             Profile.ActiveElement.rollHistory = parseResult.rollHistory;
+            Profile.ActiveElement.backstory = parseResult.backstory;
+            Profile.ActiveElement.class = parseResult.class;
+            Profile.ActiveElement.classLevel = parseResult.classLevel;
+            Profile.ActiveElement.background = parseResult.background;
+            Profile.ActiveElement.playerName = parseResult.playerName;
+            Profile.ActiveElement.race = parseResult.race;
+            Profile.ActiveElement.alignment = parseResult.alignment;
+            Profile.ActiveElement.xp = parseResult.xp;
             UpdateHistory();
         } catch {
             ShowPopUp('Upload Error', 'The file you uploaded was either not a compatible JSON file or was corrupted', 'Close', 'Okay');
         }
 
-        UpdateName();
+        UpdateSheets();
     };
 
     if (file != null) reader.readAsText(file);
@@ -399,7 +426,13 @@ function DeleteHistory() {
 }
 
 function DropdownSelect(element) {
-    if (element.checked) element.parentElement.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.setAttribute("data-dropdown-content", element.parentElement.children[1].firstElementChild.innerHTML)
+    var activeValue = element.parentElement.children[1].querySelector(".dropdownListItemLabelText").innerHTML;
+
+    if (element.name == "class") Profile.ActiveElement.class = activeValue;
+    if (element.name == "alignment") Profile.ActiveElement.alignment = activeValue;
+    if (element.name == "race") Profile.ActiveElement.race = activeValue;
+
+    if (element.checked) element.parentElement.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.setAttribute("data-dropdown-content", activeValue)
     else if (document.querySelectorAll("input[name=" + element.name + "]:checked").length > 0) element.parentElement.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.setAttribute("data-dropdown-content", "None");
 }
 
@@ -432,21 +465,38 @@ const numInputs = document.querySelectorAll('input[type=number]')
 
 numInputs.forEach(function(input) {
   input.addEventListener('change', function(e) {
+    var min = Number(e.target.min);
+    var max = Number(e.target.max);
+
     if (e.target.value == '') {
         if (e.target.min != '') 
-            e.target.value = e.target.min;
+            e.target.value = min;
         else if (e.target.max != '')
-            e.target.value = e.target.max;
+            e.target.value = max;
         else
             e.target.value = 0;
-    } else if (e.target.value < e.target.min && e.target.min != '') {
-        e.target.value = e.target.min
-    } else if (e.target.value > e.target.max && e.target.max != '') {
-        e.target.value = e.target.max
+    } else if ((e.target.value < min) && (e.target.min != '')) {
+        e.target.value = e.target.min;
+    } else if ((e.target.value > max) && (e.target.max != '')) {
+        e.target.value = e.target.max;
     }
   })
 })
 
-function ResetDropdown(params) {
-    
+function ResetDropdown(element) {
+    var listItems = element.parentElement.querySelector('ul').children;
+
+    for (const item of listItems) {
+        item.firstElementChild.checked = false;
+    }
+}
+
+var sheets = Array.from(document.querySelector('.sheetContentArea').children);
+function SwitchSheet(indexToSelect) {
+    for (const sheet of sheets) {
+        var index = sheets.indexOf(sheet);
+
+        if (index == indexToSelect) sheet.classList.add('active');
+        else sheet.classList.remove('active');
+    }
 }

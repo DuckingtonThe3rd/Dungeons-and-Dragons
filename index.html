@@ -42,43 +42,6 @@
       <h1 class="settingsTitle panelTitle">Settings</h1>
     </div>
     <div class="settingsArea">
-      <section class="settingsGroup">
-        <button class="sectionTitle" type="button" aria-label="Toggle Sidebar Section"
-          onclick="ToggleSettingGroup(this.parentElement.children[1], this.children[0])" disabled>
-          <img src="icons/chevron-right.svg" alt="Arrow Icon" class="arrow active">
-          <div class="title">
-            <img src="icons/layout-sidebar-inset-reverse.svg" alt="Sidebar Icon">
-            <h2 class="sectionTitleText">Sidebar</h2>
-          </div>
-        </button>
-        <div class="settingsGroupContent active">
-
-          <div class="settingOption">
-            <label class="settingOptionLabel" for="displaySidebar">
-              <div class="labelText">Display</div>
-              <input type="checkbox" class="switchBox" id="displaySidebar" checked>
-              <div class="switch"></div>
-            </label>
-          </div>
-
-          <div class="settingOption">
-            <label class="settingOptionLabel" for="monoSidebar">
-              <div class="labelText">Monochrome</div>
-              <input type="checkbox" class="switchBox" id="monoSidebar">
-              <div class="switch"></div>
-            </label>
-          </div>
-
-          <div class="settingOption">
-            <label class="settingOptionLabel" for="sidebarEffect">
-              <div class="labelText">Effects</div>
-              <input type="checkbox" class="switchBox" id="sidebarEffect">
-              <div class="switch"></div>
-            </label>
-          </div>
-
-        </div>
-      </section>
 
       <section class="settingsGroup">
         <button class="sectionTitle" type="button" aria-label="Toggle Profiles Section"
@@ -136,14 +99,6 @@
         <div class="settingsGroupContent active">
 
           <div class="settingOption">
-            <label class="settingOptionLabel" for="darkMode">
-              <div class="labelText">Dark Mode</div>
-              <input type="checkbox" class="switchBox" id="darkMode">
-              <div class="switch"></div>
-            </label>
-          </div>
-
-          <div class="settingOption">
             <label class="settingOptionLabel" for="animations">
               <div class="labelText">Animations</div>
               <input type="checkbox" class="switchBox" id="animations" checked>
@@ -153,7 +108,7 @@
 
           <div class="settingOption">
             <label class="settingOptionLabel" for="infoBar">
-              <div class="labelText">Info Bar</div>
+              <div class="labelText">Blurring</div>
               <input type="checkbox" class="switchBox" id="infoBar" checked>
               <div class="switch"></div>
             </label>
@@ -205,36 +160,36 @@
       <h1 class="sheetTitle panelTitle">Sheets</h1>
     </div>
     <div class="sheetTabs">
-      <input type="radio" id="characterTabRadio" name="sheetTab" checked>
+      <input type="radio" id="characterTabRadio" name="sheetTab" onchange="SwitchSheet(0)" checked>
       <label class="sheetTab active clickable" for="characterTabRadio">
         <img src="icons/person-gear.svg" alt="Person Gear Icon">
         <div>Character</div>
       </label>
-      <input type="radio" id="combatTabRadio" name="sheetTab">
+      <input type="radio" id="combatTabRadio" name="sheetTab" onchange="SwitchSheet(1)">
       <label class="sheetTab clickable" for="combatTabRadio">
         <img src="icons/bullseye.svg" alt="Bullseye Icon">
         <div>Combat</div>
       </label>
-      <input type="radio" id="lookTabRadio" name="sheetTab">
+      <input type="radio" id="lookTabRadio" name="sheetTab" onchange="SwitchSheet(2)">
       <label class="sheetTab clickable" for="lookTabRadio">
         <img src="icons/palette.svg" alt="Palette Icon">
         <div>Look</div>
       </label>
-      <input type="radio" id="spellsTabRadio" name="sheetTab">
+      <input type="radio" id="spellsTabRadio" name="sheetTab" onchange="SwitchSheet(3)">
       <label class="sheetTab clickable" for="spellsTabRadio">
         <img src="icons/magic.svg" alt="Wand Icon">
         <div>Spells</div>
       </label>
     </div>
     <div class="sheetContentArea">
-      <section class="sheetContent" id="characterSheet">
+      <section class="sheetContent active" id="characterSheet">
         <div class="characterType">
           <div class="nameInfo">
             <input autocomplete="off" autocorrect="off" spellcheck="false"
-              oninput="Profile.ActiveElement.name = this.value; UpdateName()" class="sheetName clickable" type="text"
+              oninput="Profile.ActiveElement.name = this.value; UpdateSheets()" class="sheetName clickable" type="text"
               aria-label="Player Name" value="Dungeon Master" placeholder="Name Here" id="characterNameSheet">
             <textarea type="text" id="backstoryField" placeholder="Backstory" aria-label="Backstory"
-              class="clickable"></textarea>
+              class="clickable" onchange="Profile.ActiveElement.backstory = this.value"></textarea>
           </div>
           <div class="characterDetails">
             <div class="infoFieldContainer">
@@ -242,19 +197,28 @@
                 <div class="dropdownWrapper">
                   <div class="infoField clickable inputElement dropdownContainer" tabindex="0"
                     aria-label="Class Dropdown">
-                    <label class="dropdownOpenLabel">
+                    <div class="dropdownOpenLabel">
                       <div class="dropdownLabel" data-dropdown-title="Select Class" data-dropdown-content="None"></div>
                       <img class="dropdownArrow" src="icons/chevron-down.svg" alt="Down Arrow">
-                    </label>
+                    </div>
                     <div class="dropdownContent">
                       <div class="dropdownSearchbar">
                         <input type="text" class="searchbox" aria-label="Search Classes" placeholder="Search"
                           oninput="SearchDropdown(this)" autocomplete="off" autocorrect="off" spellcheck="false">
-                        <button class="searchButton" type="submit" aria-label="Reset" onclick="ResetDropdown(this)">
-                          <img src="icons/search.svg" alt="Search Icon">
+                        <button class="resetButton" type="reset" aria-label="Clear Selection"
+                          onclick="ResetDropdown(this.parentElement)">
+                          <img src="icons/x.svg" alt="Close Icon">
                         </button>
                       </div>
                       <ul class="dropdownList">
+                        <li>
+                          <input type="radio" id="multiclassClass" name="class" onchange="DropdownSelect(this)">
+                          <label class="dropdownListItemLabel" for="multiclassClass">
+                            <img src="icons/person-add.svg" alt="Person Add Icon">
+                            <div class="dropdownListItemLabelText">Multiclass</div>
+                          </label>
+                        </li>
+
                         <li>
                           <input type="radio" id="barbarianClass" name="class" onchange="DropdownSelect(this)">
                           <label class="dropdownListItemLabel" for="barbarianClass">
@@ -358,30 +322,31 @@
                 </div>
               </div>
               <input type="number" class="clickable inputElement" min="1" max="20" value="1" aria-label="Level"
-                id="levelField">
+                id="levelField" onchange="Profile.ActiveElement.classLevel = this.value">
             </div>
             <div class="infoFieldContainer">
               <input type="text" class="infoField clickable inputElement" id="backgroundField" autocomplete="off"
-                autocorrect="off" spellcheck="false" placeholder="Background" aria-label="Background">
+                autocorrect="off" spellcheck="false" placeholder="Background" aria-label="Background" onchange="Profile.ActiveElement.background = this.value">
             </div>
             <div class="infoFieldContainer">
               <input type="text" class="infoField clickable inputElement" id="playerNameField" autocomplete="off"
-                autocorrect="off" spellcheck="false" placeholder="Player Name" aria-label="Player Name">
+                autocorrect="off" spellcheck="false" placeholder="Player Name" aria-label="Player Name" onchange="Profile.ActiveElement.playerName = this.value">
             </div>
             <div class="infoFieldContainer">
               <div class="dropdownWrapper">
                 <div class="infoField clickable inputElement dropdownContainer" tabindex="0" aria-label="Race Dropdown">
-                  <label class="dropdownOpenLabel">
+                  <div class="dropdownOpenLabel">
                     <div class="dropdownLabel" data-dropdown-title="Select Race" data-dropdown-content="None"></div>
                     <img class="dropdownArrow" src="icons/chevron-down.svg" alt="Down Arrow">
-                  </label>
+                  </div>
                   <div class="dropdownContent">
                     <div class="dropdownSearchbar">
                       <input type="text" class="searchbox" aria-label="Search Races" placeholder="Search"
                         oninput="SearchDropdown(this)" autocomplete="off" autocorrect="off" spellcheck="false">
-                      <div class="searchButton" type="submit" aria-label="Search">
-                        <img src="icons/search.svg" alt="Search Icon">
-                      </div>
+                      <button class="resetButton" type="reset" aria-label="Clear Selection"
+                        onclick="ResetDropdown(this.parentElement)">
+                        <img src="icons/x.svg" alt="Close Icon">
+                      </button>
                     </div>
                     <ul class="dropdownList">
                       <li>
@@ -1034,11 +999,13 @@
             </div>
             <div class="infoFieldContainer">
               <div class="dropdownWrapper">
-                <div class="infoField clickable inputElement dropdownContainer" tabindex="0" aria-label="Alignment Dropdown">
-                  <label class="dropdownOpenLabel">
-                    <div class="dropdownLabel" data-dropdown-title="Select Alignment" data-dropdown-content="None"></div>
+                <div class="infoField clickable inputElement dropdownContainer" tabindex="0"
+                  aria-label="Alignment Dropdown">
+                  <div class="dropdownOpenLabel">
+                    <div class="dropdownLabel" data-dropdown-title="Select Alignment" data-dropdown-content="None">
+                    </div>
                     <img class="dropdownArrow" src="icons/chevron-down.svg" alt="Down Arrow">
-                  </label>
+                  </div>
                   <div class="dropdownContent">
                     <ul class="dropdownList">
                       <li>
@@ -1047,7 +1014,7 @@
                           <div class="dropdownListItemLabelText">Lawful Good</div>
                         </label>
                       </li>
-                      
+
                       <li>
                         <input type="radio" id="neutralGoodAlignment" name="alignment" onchange="DropdownSelect(this)">
                         <label class="dropdownListItemLabel" for="neutralGoodAlignment">
@@ -1063,12 +1030,13 @@
                       </li>
 
                       <li>
-                        <input type="radio" id="lawfulNeutralAlignment" name="alignment" onchange="DropdownSelect(this)">
+                        <input type="radio" id="lawfulNeutralAlignment" name="alignment"
+                          onchange="DropdownSelect(this)">
                         <label class="dropdownListItemLabel" for="lawfulNeutralAlignment">
                           <div class="dropdownListItemLabelText">Lawful Neutral</div>
                         </label>
                       </li>
-                      
+
                       <li>
                         <input type="radio" id="trueNeutralAlignment" name="alignment" onchange="DropdownSelect(this)">
                         <label class="dropdownListItemLabel" for="trueNeutralAlignment">
@@ -1077,7 +1045,8 @@
                       </li>
 
                       <li>
-                        <input type="radio" id="chaoticNeutralAlignment" name="alignment" onchange="DropdownSelect(this)">
+                        <input type="radio" id="chaoticNeutralAlignment" name="alignment"
+                          onchange="DropdownSelect(this)">
                         <label class="dropdownListItemLabel" for="chaoticNeutralAlignment">
                           <div class="dropdownListItemLabelText">Chaotic Neutral</div>
                         </label>
@@ -1089,7 +1058,7 @@
                           <div class="dropdownListItemLabelText">Lawful Evil</div>
                         </label>
                       </li>
-                      
+
                       <li>
                         <input type="radio" id="neutralEvilAlignment" name="alignment" onchange="DropdownSelect(this)">
                         <label class="dropdownListItemLabel" for="neutralEvilAlignment">
@@ -1104,16 +1073,32 @@
                         </label>
                       </li>
                     </ul>
+                    <button class="largeActionButton" type="reset" onclick="ResetDropdown(this)" aria-label="Clear Selection">
+                      <img src="icons/x.svg" alt="Save Icon">
+                      Clear
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
             <div class="infoFieldContainer">
               <label for="xpField">XP</label>
-              <input type="number" class="infoField clickable inputElement" id="xpField" min="0" value="0">
+              <input type="number" class="infoField clickable inputElement" id="xpField" min="0" max="355000" value="0" onchange="Profile.ActiveElement.xp = this.value">
             </div>
           </div>
         </div>
+      </section>
+      
+      <section class="sheetContent" id="combatSheet">
+        Combat Sheet
+      </section>
+
+      <section class="sheetContent" id="lookSheet">
+        Look Sheet
+      </section>
+
+      <section class="sheetContent" id="spellsSheet">
+        Spells Sheet
       </section>
     </div>
   </section>
@@ -1130,7 +1115,7 @@
             <div class="tab clickable" onclick="SelectTab(this)">
               <input tabindex="0" type="text" aria-label="Player Name" class="tabName clickable" value="Dungeon Master"
                 placeholder="Name Here" autocomplete="off" autocorrect="off" spellcheck="false"
-                oninput="Profile.ActiveElement.name = this.value; UpdateName()">
+                oninput="Profile.ActiveElement.name = this.value; UpdateSheets()">
               <button class="closeTab circleIconButton" type="button" aria-label="Close Tab"
                 onmousedown="RequestDeleteTab(this.parentElement)" onclick="RequestDeleteTab(this.parentElement)">
                 <img src="icons/x.svg" alt="Close Icon">
@@ -1144,7 +1129,7 @@
       </section>
       <section class="characterInfo">
         <input autocomplete="off" autocorrect="off" spellcheck="false"
-          oninput="Profile.ActiveElement.name = this.value; UpdateName()" class="characterName clickable" type="text"
+          oninput="Profile.ActiveElement.name = this.value; UpdateSheets()" class="characterName clickable" type="text"
           aria-label="Player Name" value="Dungeon Master" placeholder="Name Here" id="characterNameGlobal">
         <div class="characterActions">
           <button class="circleIconButton" type="button" aria-label="Download JSON" onclick="DownloadActiveProfile()">
@@ -1155,7 +1140,7 @@
             <img src="icons/upload.svg" alt="Upload Icon">
           </button>
           <button class="circleIconButton" type="button" aria-label="Open Sheet" onclick="OpenSheet()">
-            <img src="icons/open.svg" alt="Open Icon">
+            <img src="icons/layout-sidebar-inset-reverse.svg" alt="Open Icon">
           </button>
         </div>
       </section>

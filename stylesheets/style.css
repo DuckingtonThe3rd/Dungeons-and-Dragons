@@ -329,7 +329,8 @@ section.settingsPanel {
 
 section.sheetPanel {
     transform: translateX(100vw);
-    width: 70vw;
+    width: 60em;
+    max-width: calc(100vw - 5em);
 }
 
 
@@ -965,11 +966,12 @@ section.settingsPanel .sectionTitle:focus .arrow {
 
 #characterSheet .characterType .characterDetails {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: 1fr 1fr 1fr;
     row-gap: 1em;
     column-gap: 1em;
     max-height: 191.975px;
+    width: 100%;
 }
 
 #characterSheet .characterType .characterDetails .infoFieldContainer {
@@ -985,13 +987,18 @@ section.settingsPanel .sectionTitle:focus .arrow {
     padding: 1.25em;
     width: 100%;
     background: rgb(230, 230, 230);
-    color: #2c2c2c;
+    color: #434343;
     cursor: text;
+    font-family: 'Poppins Bold', sans-serif;
+}
+
+#characterSheet .characterType .characterDetails .infoFieldContainer .inputElement:placeholder-shown {
+    font-family: 'Poppins Medium', sans-serif;
 }
 
 #characterSheet .characterType .characterDetails .infoFieldContainer .inputElement:hover, #characterSheet .characterType .characterDetails .infoFieldContainer .inputElement:focus {
     transform: scale(1.05);
-    background: rgb(250, 250, 250) ;
+    background: rgb(250, 250, 250);
     box-shadow: none;
     outline: none;
 }
@@ -1001,14 +1008,26 @@ section.settingsPanel .sectionTitle:focus .arrow {
 }
 
 #characterSheet .characterType .characterDetails .infoFieldContainer input[type="number"] {
-    width: 20%;
+    max-width: 10%;
+    width: fit-content;
+    margin-left: auto;
+    text-align: right;
+    background: rgb(240, 240, 240);
+    font-family: 'Poppins Bold', sans-serif;
 }
 
 #characterSheet .characterType .characterDetails .infoFieldContainer label {
     padding-left: 1em;
     color: #757575;
     font-size: 0.85em;
+    width: fit-content;
+}
+
+.dropdownWrapperNormalizer {
+    display: flex;
     width: 100%;
+    position: relative;
+    align-self: baseline;
 }
 
 .dropdownWrapper {
@@ -1031,35 +1050,23 @@ section.settingsPanel .sectionTitle:focus .arrow {
 
 .dropdownContainer .dropdownOpenLabel {
     padding: 0 !important;
-    width: 100%;
+    width: 100% !important;
     display: flex;
     justify-content: space-between;
     cursor: pointer !important;
 }
 
-.dropdownState {
-    position: absolute;
-    opacity: 0;
-}
-
-.dropdownState:checked + .dropdownContainer {
-    background: white !important;
-    transform: scale(1.025) !important;
-}
-
-.dropdownState:checked + .dropdownContainer:hover {
-    transform: scale(1.05) !important;
-}
-
-#characterSheet .characterType .characterDetails .infoFieldContainer .dropdownState:focus + .dropdownContainer {
+#characterSheet .characterType .characterDetails .infoFieldContainer .dropdownContainer:focus-within {
     transform: scale(1.025);
     background: rgb(250, 250, 250) ;
     box-shadow: none;
     outline: none;
     transform: scale(1.05);
+    z-index: 10;
+    min-width: 267.438px;
 }
 
-.dropdownState:checked + .dropdownContainer .dropdownArrow {
+.dropdownContainer:focus-within .dropdownArrow {
     transform: rotate(-180deg);
 }
 
@@ -1070,12 +1077,16 @@ section.settingsPanel .sectionTitle:focus .arrow {
     transform: scale(1.3);
 }
 
-.dropdownState:checked + .dropdownContainer .dropdownContent {
+.dropdownContent * {
+    height: 0px;
+}
+
+.dropdownContainer:focus-within .dropdownContent {
     transform: scale(1);
     opacity: 1;
     padding: 1em;
     height: auto !important;
-    background: rgb(250, 250, 250);
+    background: rgb(240, 240, 240);
     margin-top: 1em;
     display: flex;
     flex-direction: column;
@@ -1083,7 +1094,15 @@ section.settingsPanel .sectionTitle:focus .arrow {
     z-index: auto;
 }
 
-.dropdownState:checked + .dropdownContainer .dropdownLabel:after {
+.dropdownContainer:focus-within .dropdownContent * {
+    height: auto;
+}
+
+.dropdownContainer:focus-within .dropdownContent .dropdownList {
+    height: 12em;
+}
+
+.dropdownContainer:focus-within .dropdownLabel:after {
     content: attr(data-dropdown-title);
 }
 
@@ -1093,24 +1112,28 @@ section.settingsPanel .sectionTitle:focus .arrow {
 
 .dropdownContainer .dropdownLabel::after {
     content: attr(data-dropdown-content);
+    color: #434343;
+    font-family: 'Poppins Bold', sans-serif;
 }
 
 .dropdownContent .dropdownSearchbar {
     background: white;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    border-radius: 75px;
 }
 
 .dropdownContent .dropdownSearchbar .searchbox {
     border: none;
-    padding: 0.5em 1em;
+    padding: 0.25em 1em;
     width: 70%;
     background: transparent;
     color: #666666;
+    border-radius: 75px;
 }
 
 .dropdownContent .dropdownSearchbar .searchButton {
-    background: transparent;
     box-shadow: none;
     border-radius: 100%;
     aspect-ratio: 1 / 1;
@@ -1119,10 +1142,13 @@ section.settingsPanel .sectionTitle:focus .arrow {
     align-items: center;
     padding: 0.75em;
     margin: 0.25em;
+    transform: scale(1.3);
+    background: #2c2c2c;
 }
 
-.dropdownContent .dropdownSearchbar .searchbox:focus + .searchButton img {
+.dropdownContent .dropdownSearchbar .searchButton img {
     filter: invert(1);
+    transform: scale(0.85);
 }
 
 .dropdownContent .dropdownSearchbar:hover {
@@ -1130,43 +1156,23 @@ section.settingsPanel .sectionTitle:focus .arrow {
 }
 
 .dropdownContent .dropdownSearchbar .searchbox:active {
-    transform: scale(0.85);
-}
-
-.dropdownContent .dropdownSearchbar:focus-within {
-    background: rgb(69, 69, 69);
-}
-
-.dropdownContent .dropdownSearchbar:focus-within .searchbox {
-    color: white;
+    transform: scale(0.95) !important;
 }
 
 .dropdownContent .dropdownSearchbar .searchbox:focus {
     outline: none;
-}
-
-.dropdownContent .dropdownSearchbar .searchButton:focus, .dropdownContent .dropdownSearchbar .searchButton:hover {
-    outline: none;
-    transform: scale(1.3);
-    background: #2c2c2c;
-}
-
-.dropdownContent .dropdownSearchbar .searchButton:focus img, .dropdownContent .dropdownSearchbar .searchButton:hover img {
-    filter: invert(1);
-}
-
-.dropdownContent .dropdownSearchbar .searchButton:active {
-    transform: scale(0.85);
+    font-family: 'Poppins Bold', sans-serif;
 }
 
 .dropdownContent .dropdownList {
-    padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     gap: 0.5em;
-    max-height: 12em;
     overflow-y: scroll;
+    background: rgb(230, 230, 230);
+    padding: 0.75em 0.5em;
 }
 
 .dropdownContent .dropdownList li {
@@ -1186,6 +1192,7 @@ section.settingsPanel .sectionTitle:focus .arrow {
 }
 
 .dropdownContent .dropdownList li input[type="radio"]:checked + .dropdownListItemLabel .dropdownListItemLabelText {
+    font-family: 'Poppins Bold', sans-serif;
     color: white;
 }
 
@@ -1194,7 +1201,7 @@ section.settingsPanel .sectionTitle:focus .arrow {
 }
 
 .dropdownContent .dropdownList li .dropdownListItemLabel {
-    background: rgb(240, 240, 240);
+    background: rgb(220, 220, 220);
     font-size: 0.85em;
     padding: 1em;
     display: flex;
@@ -1206,10 +1213,18 @@ section.settingsPanel .sectionTitle:focus .arrow {
 }
 
 .dropdownContent .dropdownList li .dropdownListItemLabel:hover, .dropdownContent .dropdownList li input[type="radio"]:focus + .dropdownListItemLabel {
-    background: rgb(245, 245, 245);
+    background: rgb(210, 210, 210);
     transform: scale(1);
+}
+
+.dropdownContent .dropdownList li input[type="radio"]:focus + .dropdownListItemLabel .dropdownListItemLabelText {
+    font-family: 'Poppins Bold', sans-serif;
 }
 
 .dropdownContent .dropdownList li .dropdownListItemLabel:active {
     transform: scale(0.9);
+}
+
+.TEST_ROLL {
+    margin-top: 1em;
 }

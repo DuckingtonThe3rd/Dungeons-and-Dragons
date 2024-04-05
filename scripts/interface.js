@@ -397,3 +397,56 @@ function DeleteHistory() {
         HidePopUp();
     };
 }
+
+function DropdownSelect(element) {
+    if (element.checked) element.parentElement.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.setAttribute("data-dropdown-content", element.parentElement.children[1].firstElementChild.innerHTML)
+    else if (document.querySelectorAll("input[name=" + element.name + "]:checked").length > 0) element.parentElement.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.setAttribute("data-dropdown-content", "None");
+}
+
+for (const container of document.querySelectorAll(".dropdownContainer")) {
+    container.addEventListener("focusout", () => {
+        element = container.querySelector("input[type='radio']")
+        if (!document.querySelectorAll("input[name=" + element.name + "]:checked").length > 0) { 
+            element.parentElement.parentElement.parentElement.parentElement.firstElementChild.firstElementChild.setAttribute("data-dropdown-content", "None"); 
+        }
+    });
+}
+
+function SearchDropdown(searchbar) {
+    var options = [];
+    var optionChildren = searchbar.parentElement.parentElement.children[1].children;
+    for (const option of optionChildren) {
+        var listLabel = option.children[1];
+
+        var text = listLabel.firstElementChild.innerHTML;
+        if (text.toLowerCase().includes(searchbar.value.toLowerCase().toString())) {
+            options.push(text);
+            option.style.display = 'block';
+        } else {
+            option.style.display = 'none';
+        }
+    }
+}
+
+const numInputs = document.querySelectorAll('input[type=number]')
+
+numInputs.forEach(function(input) {
+  input.addEventListener('change', function(e) {
+    if (e.target.value == '') {
+        if (e.target.min != '') 
+            e.target.value = e.target.min;
+        else if (e.target.max != '')
+            e.target.value = e.target.max;
+        else
+            e.target.value = 0;
+    } else if (e.target.value < e.target.min && e.target.min != '') {
+        e.target.value = e.target.min
+    } else if (e.target.value > e.target.max && e.target.max != '') {
+        e.target.value = e.target.max
+    }
+  })
+})
+
+function ResetDropdown(params) {
+    
+}

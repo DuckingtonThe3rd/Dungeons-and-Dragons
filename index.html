@@ -238,8 +238,125 @@
           </div>
           <div class="characterDetails">
             <div class="infoFieldContainer">
-              <input type="text" class="infoField clickable inputElement" autocomplete="off" autocorrect="off"
-                spellcheck="false" placeholder="Class" aria-label="Class Name">
+              <div class="dropdownWrapperNormalizer">
+                <div class="dropdownWrapper">
+                  <div class="infoField clickable inputElement dropdownContainer" tabindex="0"
+                    aria-label="Class Dropdown">
+                    <label class="dropdownOpenLabel">
+                      <div class="dropdownLabel" data-dropdown-title="Select Class" data-dropdown-content="None"></div>
+                      <img class="dropdownArrow" src="icons/chevron-down.svg" alt="Down Arrow">
+                    </label>
+                    <div class="dropdownContent">
+                      <div class="dropdownSearchbar">
+                        <input type="text" class="searchbox" aria-label="Search Classes" placeholder="Search"
+                          oninput="SearchDropdown(this)" autocomplete="off" autocorrect="off" spellcheck="false">
+                        <button class="searchButton" type="submit" aria-label="Reset" onclick="ResetDropdown(this)">
+                          <img src="icons/search.svg" alt="Search Icon">
+                        </button>
+                      </div>
+                      <ul class="dropdownList">
+                        <li>
+                          <input type="radio" id="barbarianClass" name="class" onchange="DropdownSelect(this)">
+                          <label class="dropdownListItemLabel" for="barbarianClass">
+                            <div class="dropdownListItemLabelText">Barbarian</div>
+                          </label>
+                        </li>
+
+                        <li>
+                          <input type="radio" id="bardClass" name="class" onchange="DropdownSelect(this)">
+                          <label class="dropdownListItemLabel" for="bardClass">
+                            <div class="dropdownListItemLabelText">Bard</div>
+                          </label>
+                        </li>
+
+                        <li>
+                          <input type="radio" id="clericClass" name="class" onchange="DropdownSelect(this)">
+                          <label class="dropdownListItemLabel" for="clericClass">
+                            <div class="dropdownListItemLabelText">Cleric</div>
+                          </label>
+                        </li>
+
+                        <li>
+                          <input type="radio" id="druidClass" name="class" onchange="DropdownSelect(this)">
+                          <label class="dropdownListItemLabel" for="druidClass">
+                            <div class="dropdownListItemLabelText">Druid</div>
+                          </label>
+                        </li>
+
+                        <li>
+                          <input type="radio" id="fighterClass" name="class" onchange="DropdownSelect(this)">
+                          <label class="dropdownListItemLabel" for="fighterClass">
+                            <div class="dropdownListItemLabelText">Fighter</div>
+                          </label>
+                        </li>
+
+                        <li>
+                          <input type="radio" id="monkClass" name="class" onchange="DropdownSelect(this)">
+                          <label class="dropdownListItemLabel" for="monkClass">
+                            <div class="dropdownListItemLabelText">Monk</div>
+                          </label>
+                        </li>
+
+                        <li>
+                          <input type="radio" id="paladinClass" name="class" onchange="DropdownSelect(this)">
+                          <label class="dropdownListItemLabel" for="paladinClass">
+                            <div class="dropdownListItemLabelText">Paladin</div>
+                          </label>
+                        </li>
+
+                        <li>
+                          <input type="radio" id="rangerClass" name="class" onchange="DropdownSelect(this)">
+                          <label class="dropdownListItemLabel" for="rangerClass">
+                            <div class="dropdownListItemLabelText">Ranger</div>
+                          </label>
+                        </li>
+
+                        <li>
+                          <input type="radio" id="rougeClass" name="class" onchange="DropdownSelect(this)">
+                          <label class="dropdownListItemLabel" for="rougeClass">
+                            <div class="dropdownListItemLabelText">Rouge</div>
+                          </label>
+                        </li>
+
+                        <li>
+                          <input type="radio" id="sorcererClass" name="class" onchange="DropdownSelect(this)">
+                          <label class="dropdownListItemLabel" for="sorcererClass">
+                            <div class="dropdownListItemLabelText">Sorcerer</div>
+                          </label>
+                        </li>
+
+                        <li>
+                          <input type="radio" id="warlockClass" name="class" onchange="DropdownSelect(this)">
+                          <label class="dropdownListItemLabel" for="warlockClass">
+                            <div class="dropdownListItemLabelText">Warlock</div>
+                          </label>
+                        </li>
+
+                        <li>
+                          <input type="radio" id="wizardClass" name="class" onchange="DropdownSelect(this)">
+                          <label class="dropdownListItemLabel" for="wizardClass">
+                            <div class="dropdownListItemLabelText">Wizard</div>
+                          </label>
+                        </li>
+
+                        <li>
+                          <input type="radio" id="artifacterClass" name="class" onchange="DropdownSelect(this)">
+                          <label class="dropdownListItemLabel" for="artifacterClass">
+                            <div class="dropdownListItemLabelText">Artifacter</div>
+                          </label>
+                        </li>
+
+                        <li>
+                          <input type="radio" id="bloodhunterClass" name="class" onchange="DropdownSelect(this)">
+                          <label class="dropdownListItemLabel" for="bloodhunterClass">
+                            <div class="dropdownListItemLabelText">Blood Hunter</div>
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <input type="number" class="clickable inputElement" min="1" max="20" value="1" aria-label="Level"
                 id="levelField">
             </div>
@@ -253,30 +370,661 @@
             </div>
             <div class="infoFieldContainer">
               <div class="dropdownWrapper">
-                <input type="checkbox" id="raceField" class="dropdownState">
-                <div class="infoField clickable inputElement dropdownContainer">
-                  <label for="raceField" class="dropdownOpenLabel">
+                <div class="infoField clickable inputElement dropdownContainer" tabindex="0" aria-label="Race Dropdown">
+                  <label class="dropdownOpenLabel">
                     <div class="dropdownLabel" data-dropdown-title="Select Race" data-dropdown-content="None"></div>
                     <img class="dropdownArrow" src="icons/chevron-down.svg" alt="Down Arrow">
                   </label>
                   <div class="dropdownContent">
                     <div class="dropdownSearchbar">
-                      <input type="text" class="searchbox" aria-label="Search Races" placeholder="Search">
-                      <button class="searchButton" type="submit" aria-label="Search">
+                      <input type="text" class="searchbox" aria-label="Search Races" placeholder="Search"
+                        oninput="SearchDropdown(this)" autocomplete="off" autocorrect="off" spellcheck="false">
+                      <div class="searchButton" type="submit" aria-label="Search">
                         <img src="icons/search.svg" alt="Search Icon">
-                      </button>
+                      </div>
                     </div>
                     <ul class="dropdownList">
                       <li>
-                        <input type="radio" id="bardRace" name="race">
-                        <label class="dropdownListItemLabel" for="bardRace">
-                          <div class="dropdownListItemLabelText">Bard</div>
-                        </label>
-                      </li>
-                      <li>
-                        <input type="radio" id="dragonbornRace" name="race">
+                        <input type="radio" id="dragonbornRace" name="race" onchange="DropdownSelect(this)">
                         <label class="dropdownListItemLabel" for="dragonbornRace">
                           <div class="dropdownListItemLabelText">Dragonborn</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="dwarfRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="dwarfRace">
+                          <div class="dropdownListItemLabelText">Dwarf</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="elfRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="elfRace">
+                          <div class="dropdownListItemLabelText">Elf</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="gnomeRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="gnomeRace">
+                          <div class="dropdownListItemLabelText">Gnome</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="halfElfRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="halfElfRace">
+                          <div class="dropdownListItemLabelText">Half-Elf</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="halflingRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="halflingRace">
+                          <div class="dropdownListItemLabelText">Halfling</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="halfOrcRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="halfOrcRace">
+                          <div class="dropdownListItemLabelText">Half-Orc</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="humanRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="humanRace">
+                          <div class="dropdownListItemLabelText">Human</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="teiflingRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="teiflingRace">
+                          <div class="dropdownListItemLabelText">Teifling</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="aarakocraRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="aarakocraRace">
+                          <div class="dropdownListItemLabelText">Aarakocra</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="aasimarRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="aasimarRace">
+                          <div class="dropdownListItemLabelText">Aasimar</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="airGenasiRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="airGenasiRace">
+                          <div class="dropdownListItemLabelText">Air Genasi</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="bugbearRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="bugbearRace">
+                          <div class="dropdownListItemLabelText">Bugbear</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="centaurRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="centaurRace">
+                          <div class="dropdownListItemLabelText">Centaur</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="changelingRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="changelingRace">
+                          <div class="dropdownListItemLabelText">Changeling</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="deepGnomeRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="deepGnomeRace">
+                          <div class="dropdownListItemLabelText">Deep Gnome</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="duergarRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="duergarRace">
+                          <div class="dropdownListItemLabelText">Duergar</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="earthGenasiRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="earthGenasiRace">
+                          <div class="dropdownListItemLabelText">Earth Genasi</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="eladrinRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="eladrinRace">
+                          <div class="dropdownListItemLabelText">Eladrin</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="fairyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="fairyRace">
+                          <div class="dropdownListItemLabelText">Fairy</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="firbolgRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="firbolgRace">
+                          <div class="dropdownListItemLabelText">Firbolg</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="fireGenasiRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="fireGenasiRace">
+                          <div class="dropdownListItemLabelText">Fire Genasi</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="githyankiRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="githyankiRace">
+                          <div class="dropdownListItemLabelText">Githyanki</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="githzeraiRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="githzeraiRace">
+                          <div class="dropdownListItemLabelText">Githzerai</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="goblinRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="goblinRace">
+                          <div class="dropdownListItemLabelText">Goblin</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="goliathRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="goliathRace">
+                          <div class="dropdownListItemLabelText">Goliath</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="harengonRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="harengonRace">
+                          <div class="dropdownListItemLabelText">Harengon</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="hobgoblinRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="hobgoblinRace">
+                          <div class="dropdownListItemLabelText">Hobgoblin</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="kenkuRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="kenkuRace">
+                          <div class="dropdownListItemLabelText">Kenku</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="koboldRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="koboldRace">
+                          <div class="dropdownListItemLabelText">Kobold</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="lizardfolkRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="lizardfolkRace">
+                          <div class="dropdownListItemLabelText">Lizardfolk</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="minotaurRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="minotaurRace">
+                          <div class="dropdownListItemLabelText">Minotaur</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="orcRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="orcRace">
+                          <div class="dropdownListItemLabelText">Orc</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="satyrRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="satyrRace">
+                          <div class="dropdownListItemLabelText">Satyr</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="seaElfRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="seaElfRace">
+                          <div class="dropdownListItemLabelText">Sea Elf</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="shadarkaiRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="shadarkaiRace">
+                          <div class="dropdownListItemLabelText">Shadar-kai</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="shifterRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="shifterRace">
+                          <div class="dropdownListItemLabelText">Shifter</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="tabaxiRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="tabaxiRace">
+                          <div class="dropdownListItemLabelText">Tabaxi</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="tortleRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="tortleRace">
+                          <div class="dropdownListItemLabelText">Tortle</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="tritonRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="tritonRace">
+                          <div class="dropdownListItemLabelText">Triton</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="waterGenasiRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="waterGenasiRace">
+                          <div class="dropdownListItemLabelText">Water Genasi</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="yuantiRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="yuantiRace">
+                          <div class="dropdownListItemLabelText">Yuan-ti</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="kenderRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="kenderRace">
+                          <div class="dropdownListItemLabelText">Kender</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="astralElfRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="astralElfRace">
+                          <div class="dropdownListItemLabelText">Astral Elf</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="autognomeRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="autognomeRace">
+                          <div class="dropdownListItemLabelText">Autognome</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="giffRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="giffRace">
+                          <div class="dropdownListItemLabelText">Giff</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="hadozeeRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="hadozeeRace">
+                          <div class="dropdownListItemLabelText">Hadozee</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="plasmoidRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="plasmoidRace">
+                          <div class="dropdownListItemLabelText">Plasmoid</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="thrikreenRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="thrikreenRace">
+                          <div class="dropdownListItemLabelText">Thri-kreen</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="ownlinRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="ownlinRace">
+                          <div class="dropdownListItemLabelText">Owlin</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="leoninRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="leoninRace">
+                          <div class="dropdownListItemLabelText">Leonin</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="satyrLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="satyrLegacyRace">
+                          <div class="dropdownListItemLabelText">Satyr (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="changelingLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="changelingLegacyRace">
+                          <div class="dropdownListItemLabelText">Changeling (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="kalashtarRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="kalashtarRace">
+                          <div class="dropdownListItemLabelText">Kalashtar</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="shifterLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="shifterLegacyRace">
+                          <div class="dropdownListItemLabelText">Shifter (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="warforgedRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="warforgedRace">
+                          <div class="dropdownListItemLabelText">Warforged</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="verdanRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="verdanRace">
+                          <div class="dropdownListItemLabelText">Verdan</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="centaurLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="centaurLegacyRace">
+                          <div class="dropdownListItemLabelText">Centaur (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="loxodonRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="loxodonRace">
+                          <div class="dropdownListItemLabelText">Loxodon</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="minotaurLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="minotaurLegacyRace">
+                          <div class="dropdownListItemLabelText">Minotaur (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="simicHybridRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="simicHybridRace">
+                          <div class="dropdownListItemLabelText">Simic Hybrid</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="vedalkenRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="vedalkenRace">
+                          <div class="dropdownListItemLabelText">Vedalken</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="feralTieflingRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="feralTieflingRace">
+                          <div class="dropdownListItemLabelText">Feral Tiefling</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="tortleLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="tortleLegacyRace">
+                          <div class="dropdownListItemLabelText">Tortle (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="locathahRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="locathahRace">
+                          <div class="dropdownListItemLabelText">Locathah</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="grungRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="grungRace">
+                          <div class="dropdownListItemLabelText">Grung</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="githLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="githLegacyRace">
+                          <div class="dropdownListItemLabelText">Gith (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="aasimarLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="aasimarLegacyRace">
+                          <div class="dropdownListItemLabelText">Aasimar (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="bugbearLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="bugbearLegacyRace">
+                          <div class="dropdownListItemLabelText">Bugbear (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="firbolgLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="firbolgLegacyRace">
+                          <div class="dropdownListItemLabelText">Firbolg (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="goblinLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="goblinLegacyRace">
+                          <div class="dropdownListItemLabelText">Goblin (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="hobgoblinLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="hobgoblinLegacyRace">
+                          <div class="dropdownListItemLabelText">Hobgoblin (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="kenkuLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="kenkuLegacyRace">
+                          <div class="dropdownListItemLabelText">Kenku (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="koboldLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="koboldLegacyRace">
+                          <div class="dropdownListItemLabelText">Kobold (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="lizardfolkLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="lizardfolkLegacyRace">
+                          <div class="dropdownListItemLabelText">Lizardfolk (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="orcLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="orcLegacyRace">
+                          <div class="dropdownListItemLabelText">Orc (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="tabaxiLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="tabaxiLegacyRace">
+                          <div class="dropdownListItemLabelText">Tabaxi (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="tritonLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="tritonLegacyRace">
+                          <div class="dropdownListItemLabelText">Triton (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="yuanTiPurebloodLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="yuanTiPurebloodLegacyRace">
+                          <div class="dropdownListItemLabelText">Yuan-ti Pureblood (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="aarakocraLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="aarakocraLegacyRace">
+                          <div class="dropdownListItemLabelText">Aarakocra (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="genasiLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="genasiLegacyRace">
+                          <div class="dropdownListItemLabelText">Genasi (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="goliathLegacyRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="goliathLegacyRace">
+                          <div class="dropdownListItemLabelText">Goliath (Legacy)</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="cervanRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="cervanRace">
+                          <div class="dropdownListItemLabelText">Cervan</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="corvumRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="corvumRace">
+                          <div class="dropdownListItemLabelText">Corvum</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="gallusRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="gallusRace">
+                          <div class="dropdownListItemLabelText">Gallus</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="hedgeRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="hedgeRace">
+                          <div class="dropdownListItemLabelText">Hedge</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="jerbeenRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="jerbeenRace">
+                          <div class="dropdownListItemLabelText">Jerbeen</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="lumaRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="lumaRace">
+                          <div class="dropdownListItemLabelText">Luma</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="mapachRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="mapachRace">
+                          <div class="dropdownListItemLabelText">Mapach</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="raptorRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="raptorRace">
+                          <div class="dropdownListItemLabelText">Raptor</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="strigRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="strigRace">
+                          <div class="dropdownListItemLabelText">Strig</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="vulpinRace" name="race" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="vulpinRace">
+                          <div class="dropdownListItemLabelText">Vulpin</div>
                         </label>
                       </li>
                     </ul>
@@ -285,8 +1033,80 @@
               </div>
             </div>
             <div class="infoFieldContainer">
-              <input type="text" class="infoField clickable inputElement" id="alignmentField" autocomplete="off"
-                autocorrect="off" spellcheck="false" placeholder="Alignment" aria-label="Alignment">
+              <div class="dropdownWrapper">
+                <div class="infoField clickable inputElement dropdownContainer" tabindex="0" aria-label="Alignment Dropdown">
+                  <label class="dropdownOpenLabel">
+                    <div class="dropdownLabel" data-dropdown-title="Select Alignment" data-dropdown-content="None"></div>
+                    <img class="dropdownArrow" src="icons/chevron-down.svg" alt="Down Arrow">
+                  </label>
+                  <div class="dropdownContent">
+                    <ul class="dropdownList">
+                      <li>
+                        <input type="radio" id="lawfulGoodAlignment" name="alignment" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="lawfulGoodAlignment">
+                          <div class="dropdownListItemLabelText">Lawful Good</div>
+                        </label>
+                      </li>
+                      
+                      <li>
+                        <input type="radio" id="neutralGoodAlignment" name="alignment" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="neutralGoodAlignment">
+                          <div class="dropdownListItemLabelText">Neutral Good</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="chaoticGoodAlignment" name="alignment" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="chaoticGoodAlignment">
+                          <div class="dropdownListItemLabelText">Chaotic Good</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="lawfulNeutralAlignment" name="alignment" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="lawfulNeutralAlignment">
+                          <div class="dropdownListItemLabelText">Lawful Neutral</div>
+                        </label>
+                      </li>
+                      
+                      <li>
+                        <input type="radio" id="trueNeutralAlignment" name="alignment" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="trueNeutralAlignment">
+                          <div class="dropdownListItemLabelText">True Neutral</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="chaoticNeutralAlignment" name="alignment" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="chaoticNeutralAlignment">
+                          <div class="dropdownListItemLabelText">Chaotic Neutral</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="lawfulEvilAlignment" name="alignment" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="lawfulEvilAlignment">
+                          <div class="dropdownListItemLabelText">Lawful Evil</div>
+                        </label>
+                      </li>
+                      
+                      <li>
+                        <input type="radio" id="neutralEvilAlignment" name="alignment" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="neutralEvilAlignment">
+                          <div class="dropdownListItemLabelText">Neutral Evil</div>
+                        </label>
+                      </li>
+
+                      <li>
+                        <input type="radio" id="chaoticEvilAlignment" name="alignment" onchange="DropdownSelect(this)">
+                        <label class="dropdownListItemLabel" for="chaoticEvilAlignment">
+                          <div class="dropdownListItemLabelText">Chaotic Evil</div>
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="infoFieldContainer">
               <label for="xpField">XP</label>
@@ -363,7 +1183,7 @@
           <img src="icons/x.svg" alt="Save Icon">
           Clear
         </button>
-        <button class="largeActionButton" type="button" onclick="Roll(21, 'd20 + CHA(+1)')" style="margin-top: 1em;">
+        <button class="largeActionButton TEST_ROLL" type="button" onclick="Roll(21, 'd20 + CHA(+1)')">
           <img src="icons/bug.svg" alt="Debug Icon">
           Test
         </button>
